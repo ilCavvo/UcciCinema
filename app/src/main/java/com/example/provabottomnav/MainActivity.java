@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.example.provabottomnav.databinding.ActivityMainBinding;
 
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         replaceFragment(new FilmFragment());
-
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         binding.bottomNavigationView2.setOnItemSelectedListener(item -> {
 
             switch(item.getItemId()){
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.cinema:
                     replaceFragment(new CinemaFragment());
                     break;
-                case R.id.location:
+                case R.id.marker:
                     replaceFragment(new LocationFragment());
                     break;
             }

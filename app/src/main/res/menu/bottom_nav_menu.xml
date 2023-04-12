@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Film"
-        android:icon="@drawable/movies"
+    <item android:title="Home"
+        android:icon="@drawable/movies1"
         android:id="@+id/home"/>
     <item android:title="Cinema"
-        android:icon="@drawable/cinema"
+        android:icon="@drawable/film"
         android:id="@+id/cinema"/>
     <item android:title="Posizione"
         android:icon="@drawable/location"
-        android:id="@+id/location"/>
+        android:id="@+id/marker"/>
+    <item android:title="Game"
+        android:icon="@drawable/gamepad"
+        android:id="@+id/game"/>
 </menu>

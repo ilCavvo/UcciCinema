@@ -1,17 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FilmFragment"
-    android:background="@color/teal_700">
+    android:background="#EAE1E1"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal|center_vertical"
-        android:text="FILM"
-        android:textSize="30dp"/>
+    <LinearLayout
+        android:id="@+id/HomeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background=" #202329"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutLogoeRicerca"
+            android:layout_width="match_parent"
+            android:layout_height="111dp">
+
+            <ImageView
+                android:id="@+id/Logo"
+                android:layout_width="66dp"
+                android:layout_height="51dp"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:maxWidth="40dp"
+                android:maxHeight="40dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
+
+            <SearchView
+                android:id="@+id/BarraRicerca"
+                android:layout_width="189dp"
+                android:layout_height="23dp"
+                android:layout_marginTop="8dp"
+                android:background="#FAF5F5"
+                android:clickable="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Logo">
+
+            </SearchView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/top_trending_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/CurrentWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:text="@string/curremt_week"
+                android:textColor="#AEA1A1" />
+
+            <TextView
+                android:id="@+id/topTrending"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="end"
+                android:text="@string/top_trending_film"
+                android:textColor="#069b5b "
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/LineeColorate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+                    android:id="@+id/Grigio"
+                    android:layout_width="172dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_weight="1"
+                    android:background="#b4bac0" />
+
+
+                <View
+                    android:id="@+id/Verde"
+                    android:layout_width="172dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_weight="1"
+                    android:background=" #069b5b"
+
+                    tools:layout_editor_absoluteX="279dp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/TrendFilmLayoutO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal" />
+
+        <TextView
+            android:id="@+id/AltriFilm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:text="@string/other_film"
+            android:textColor="#069b5b "
+            android:textSize="20sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/LineeColorate2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+
+                    android:id="@+id/Grigio2"
+                    android:layout_width="172dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_weight="1"
+                    android:background="#b4bac0" />
+
+
+                <View
+
+                    android:id="@+id/Verde2"
+                    android:layout_width="172dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_weight="1"
+
+                    android:background=" #069b5b"
+                    tools:layout_editor_absoluteX="279dp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <GridView
+            android:id="@+id/AltriFilmLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="15dp"
+            android:horizontalSpacing="15dp"
+            android:nestedScrollingEnabled="true"
+            android:numColumns="3"
+            android:verticalSpacing="10dp">
+
+        </GridView>
+    </LinearLayout>
+</ScrollView>

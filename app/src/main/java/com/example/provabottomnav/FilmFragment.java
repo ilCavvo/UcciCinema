@@ -3,62 +3,129 @@ package com.example.provabottomnav;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.SearchView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FilmFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class FilmFragment extends Fragment {
+import java.util.ArrayList;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class FilmFragment extends Fragment implements View.OnClickListener{
 
-    public FilmFragment() {
-        // Required empty public constructor
-    }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FilmFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FilmFragment newInstance(String param1, String param2) {
-        FilmFragment fragment = new FilmFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private ArrayList<String> titoliTrendFilm;
+    private ArrayList<String> locandineTrendFilm = new ArrayList<>();
+    private ArrayList<String> titoliFilm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view;
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_film, container, false);
+        view =  inflater.inflate(R.layout.fragment_film, container, false);
+        super.onCreate(savedInstanceState);
+
+        ///PER IL FULLSCREEN DELL APP SENZA IL NOME DEL PROGETTO
+        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        // INIZIALIZZO LISTE FILM
+        titoliTrendFilm =new ArrayList<>();
+        titoliFilm =new ArrayList<>();
+        getTrendFilms();
+        initLayoutOrizzonatale(view);
+        getFilm();
+        initGridLayout(view);
+
+        return view;
+    }
+    private void getFilm(){
+        titoliFilm.add("doc strange 2");
+
+        titoliFilm.add("super mario");
+
+        titoliFilm.add("me contro te");
+
+        titoliFilm.add("doc strange 2");
+
+        titoliFilm.add("doc strange 2");
+
+        titoliFilm.add("doc strange 2");
+
+        titoliFilm.add("doc strange 2");
+
+        titoliFilm.add("super mario");
+
+        titoliFilm.add("me contro te");
+
+        titoliFilm.add("doc strange 2");
+
+        titoliFilm.add("doc strange 2");
+
+        titoliFilm.add("doc strange 2");
+
+    }
+    private void getTrendFilms(){
+        //POPOLO LE LISTE PER I TITOLI DEI FILM IN IN TREND
+        locandineTrendFilm.add(String.valueOf(R.drawable.img_switcher));
+        titoliTrendFilm.add("doc strange 2");
+        locandineTrendFilm.add(String.valueOf(R.drawable.immaginemoschettieri));
+        titoliTrendFilm.add("me contro te");
+        locandineTrendFilm.add(String.valueOf(R.drawable.locandina));
+        titoliTrendFilm.add("doc strange 2");
+
+        locandineTrendFilm.add(String.valueOf(R.drawable.img_switcher__1_));
+        titoliTrendFilm.add("doc strange 2");
+        locandineTrendFilm.add(String.valueOf(R.drawable.super_mario_bros_il_film_zlqbhbt));
+        titoliTrendFilm.add("doc strange 2");
+
+
+
+        Log.i("mess","sei dentro");
+
+
+    }
+
+    private void initLayoutOrizzonatale(View view){
+        Log.i("mess","sei dentro2");
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
+        RecyclerView recyclerView=view.findViewById(R.id.TrendFilmLayoutO);
+        recyclerView.setLayoutManager(layoutManager);
+        RecycleViewAdapterTrendFilms adapter=new RecycleViewAdapterTrendFilms(titoliTrendFilm,locandineTrendFilm,this.getContext());
+        recyclerView.setAdapter(adapter);
+
+    }
+
+
+    private void initGridLayout(View view){
+        Log.i("GETCOUNTS", String.valueOf(titoliFilm.size()));
+        GridViewAdapter gridadapter= new GridViewAdapter(titoliFilm);
+        GridView gridView=view.findViewById(R.id.AltriFilmLayout);
+        gridView.setAdapter(gridadapter);
+        //BLOCCO LA SCROLL VIEW COSI QUANDO IO SCROLLO LA GRID VIEW NON SI MUOVE IL LAYOUT INTERO
+        gridView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+
+        });
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

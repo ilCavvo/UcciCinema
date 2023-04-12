@@ -2,4 +2,7 @@
     <string name="app_name">ProvaBottomNav</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="curremt_week">Current week</string>
+    <string name="top_trending_film">Top Trending Film</string>
+    <string name="other_film">Other Film</string>
 </resources>
