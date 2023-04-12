@@ -109,7 +109,7 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
     private void initGridLayout(View view){
         Log.i("GETCOUNTS", String.valueOf(titoliFilm.size()));
-        GridViewAdapter gridadapter= new GridViewAdapter(titoliFilm);
+        GridViewAdapter gridadapter= new GridViewAdapter(titoliFilm, this.getContext());
         GridView gridView=view.findViewById(R.id.AltriFilmLayout);
         gridView.setAdapter(gridadapter);
         //BLOCCO LA SCROLL VIEW COSI QUANDO IO SCROLLO LA GRID VIEW NON SI MUOVE IL LAYOUT INTERO

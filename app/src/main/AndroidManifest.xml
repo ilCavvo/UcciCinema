@@ -12,6 +12,9 @@
         android:theme="@style/Theme.ProvaBottomNav"
         tools:targetApi="31">
         <activity
+            android:name=".FilmInfo"
+            android:exported="false" />
+        <activity
             android:name=".CinemaInfo"
             android:exported="false" />
         <activity
