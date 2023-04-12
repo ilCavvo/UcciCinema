@@ -4,61 +4,103 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.ListView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CinemaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class CinemaFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private String[] item = {"Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia Romagna",
+            "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
+            "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
+            "Trentino Alto Adige", "Umbria", "Val d'Aosta", "Veneto"};
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
-    public CinemaFragment() {
-        // Required empty public constructor
-    }
+    public ListView cinemaListView;
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CinemaFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CinemaFragment newInstance(String param1, String param2) {
-        CinemaFragment fragment = new CinemaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    public ArrayList<String> personeArrayList;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    AutoCompleteTextView autoCompleteTextView;
+
+    ArrayAdapter<String> adapterItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cinema, container, false);
+
+        View view;
+
+        view = inflater.inflate(R.layout.fragment_cinema, container, false);
+        super.onCreate(savedInstanceState);
+
+
+        autoCompleteTextView = view.findViewById(R.id.auto_complete_textview);
+
+        adapterItem = new ArrayAdapter<String>(this.getContext(), R.layout.list_item, item);
+
+        autoCompleteTextView.setAdapter(adapterItem);
+
+        autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                String item = adapterView.getItemAtPosition(position).toString();
+            }
+        });
+        // Recuperiamo un references a un widget attraverso il suo id
+        cinemaListView = view.findViewById(R.id.cinemaListView);
+
+        configureListView();
+
+        return view;
     }
+
+
+    private void configureListView() {
+        Log.i("ciao", "ciao");
+
+
+        ArrayList<String> nomi = new ArrayList<>();
+        nomi.add("Alessia");
+        nomi.add("Alessia 2");
+        nomi.add("Alessia 3");
+        nomi.add("Alessia 4");
+        nomi.add("Alessia 5");
+        nomi.add("Alessia 6");
+        nomi.add("Alessia 7");
+        nomi.add("Alessia 8");
+        nomi.add("Alessia 9");
+        nomi.add("Alessia 10");
+        nomi.add("Alessia 11");
+        nomi.add("Alessia 12");
+        nomi.add("Alessia 13");
+        nomi.add("Alessia 14");
+        nomi.add("Alessia 15");
+        nomi.add("Alessia 16");
+
+        // Adattatore
+        ArrayAdapter<String> personaAdapter = new ArrayAdapter<>(this.getContext(),
+                android.R.layout.simple_list_item_1,
+                nomi);
+
+        cinemaListView.setAdapter(personaAdapter);
+
+        AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter,
+                                    View view,
+                                    int position, long id) {
+                Log.d("ONITEMCLICK", "ID: " + id);
+            }
+        };
+        cinemaListView.setOnItemClickListener(clickListener);
+    }
+
 }
