@@ -1,4 +1,4 @@
-package com.example.provabottomnav;
+package com.example.provabottomnav.Classibase;
 
 public class Cinema {
 

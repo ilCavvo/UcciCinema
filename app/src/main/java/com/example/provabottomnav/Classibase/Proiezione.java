@@ -1,4 +1,7 @@
-package com.example.provabottomnav;
+package com.example.provabottomnav.Classibase;
+
+import com.example.provabottomnav.Classibase.Cinema;
+import com.example.provabottomnav.Classibase.Film;
 
 import java.time.LocalDateTime;
 

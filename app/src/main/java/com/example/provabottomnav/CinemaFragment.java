@@ -1,9 +1,7 @@
 package com.example.provabottomnav;
 
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 
-import java.util.ArrayList;
+import com.example.provabottomnav.Classibase.Region;
 
 
 public class CinemaFragment extends Fragment {
@@ -68,6 +66,7 @@ public class CinemaFragment extends Fragment {
                                     View view,
                                     int position, long id) {
                 Log.d("OnItemClick", "ID: " + id);
+                
             }
         };
         cinemaListView.setOnItemClickListener(clickListener);
