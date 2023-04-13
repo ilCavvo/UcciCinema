@@ -18,18 +18,8 @@ import java.util.ArrayList;
 
 public class CinemaFragment extends Fragment {
 
-    private String[] item = {"Abruzzo", "Basilicata", "Calabria", "Campania", "Emilia Romagna",
-            "Friuli Venezia Giulia", "Lazio", "Liguria", "Lombardia", "Marche",
-            "Molise", "Piemonte", "Puglia", "Sardegna", "Sicilia", "Toscana",
-            "Trentino Alto Adige", "Umbria", "Val d'Aosta", "Veneto"};
-
-
     public ListView cinemaListView;
-
-    public ArrayList<String> personeArrayList;
-
     AutoCompleteTextView autoCompleteTextView;
-
     ArrayAdapter<String> adapterItem;
 
     @Override
@@ -44,7 +34,7 @@ public class CinemaFragment extends Fragment {
 
         autoCompleteTextView = view.findViewById(R.id.auto_complete_textview);
 
-        adapterItem = new ArrayAdapter<String>(this.getContext(), R.layout.list_item, item);
+        adapterItem = new ArrayAdapter<String>(this.getContext(), R.layout.list_item, Region.getRegionStringArray());
 
         autoCompleteTextView.setAdapter(adapterItem);
 
@@ -66,41 +56,20 @@ public class CinemaFragment extends Fragment {
     private void configureListView() {
         Log.i("ciao", "ciao");
 
-
-        ArrayList<String> nomi = new ArrayList<>();
-        nomi.add("Alessia");
-        nomi.add("Alessia 2");
-        nomi.add("Alessia 3");
-        nomi.add("Alessia 4");
-        nomi.add("Alessia 5");
-        nomi.add("Alessia 6");
-        nomi.add("Alessia 7");
-        nomi.add("Alessia 8");
-        nomi.add("Alessia 9");
-        nomi.add("Alessia 10");
-        nomi.add("Alessia 11");
-        nomi.add("Alessia 12");
-        nomi.add("Alessia 13");
-        nomi.add("Alessia 14");
-        nomi.add("Alessia 15");
-        nomi.add("Alessia 16");
-
         // Adattatore
-        ArrayAdapter<String> personaAdapter = new ArrayAdapter<>(this.getContext(),
-                android.R.layout.simple_list_item_1,
-                nomi);
+        ArrayAdapter<Region> cinemaAdapter = new ArrayAdapter<>(this.getContext(),
+                android.R.layout.simple_list_item_1, Region.values());
 
-        cinemaListView.setAdapter(personaAdapter);
+        cinemaListView.setAdapter(cinemaAdapter);
 
         AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter,
                                     View view,
                                     int position, long id) {
-                Log.d("ONITEMCLICK", "ID: " + id);
+                Log.d("OnItemClick", "ID: " + id);
             }
         };
         cinemaListView.setOnItemClickListener(clickListener);
     }
-
 }
