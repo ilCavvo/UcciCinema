@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idRLContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#202329"
+    android:orientation="vertical"
+    tools:context=".loadingPage">
+
+    <!--on below line we are adding an image view-->
+
+    <!--on below line we are creating progress bar-->
+
+    <ImageView
+        android:id="@+id/idIVLogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/logo_definitivo" />
+
+    <ProgressBar
+        android:id="@+id/idPBLoading"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idIVLogo"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="0dp"
+        android:indeterminateTint="#069b5b" />
+
+</RelativeLayout>
