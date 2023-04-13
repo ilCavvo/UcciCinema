@@ -66,7 +66,7 @@ public class CinemaFragment extends Fragment {
                                     View view,
                                     int position, long id) {
                 Log.d("OnItemClick", "ID: " + id);
-                
+
             }
         };
         cinemaListView.setOnItemClickListener(clickListener);
