@@ -4,10 +4,17 @@ public class Cinema {
 
     private String name;
     private int cinemaRoomsNumber;
-
+    private String telefono;
     private Region region;
     private String indirizzo;
 
+    public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo) {
+        this.name = name;
+        this.cinemaRoomsNumber = cinemaRoomsNumber;
+        this.telefono = telefono;
+        this.region = region;
+        this.indirizzo = indirizzo;
+    }
 
     public Cinema(String name, int cinemaRoomsNumber) {
         this.name = name;

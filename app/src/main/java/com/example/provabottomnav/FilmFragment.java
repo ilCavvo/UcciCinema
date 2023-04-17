@@ -115,7 +115,6 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
             }
 
         });
-
     }
 
     @Override
