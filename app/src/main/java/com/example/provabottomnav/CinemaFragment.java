@@ -92,6 +92,7 @@ public class CinemaFragment extends Fragment {
                 intent.putExtra("LIST_POSITION", position);
                 intent.putExtra("cinema", cinemas.get(position));
                 startActivity(intent);
+
             }
         };
         cinemaListView.setOnItemClickListener(clickListener);
@@ -109,25 +110,26 @@ public class CinemaFragment extends Fragment {
 
         Runnable runnable = new Runnable() {
             @Override
-            public void run() {
+            public void run()  {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference();
+                DatabaseReference myRef = database.getReference("CINEMA");
                 Log.d("TAG", "Value is: " + myRef);
-                HttpHandler httpHandler = new HttpHandler();
-                String jsonString = httpHandler.makeServiceCall(String.valueOf(myRef));
+
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
-                        //Map<Object> map = (Map<Object>) dataSnapshot.getValue();
-                        //Log.d("TAG", "Value is: " + map);
-                        if (jsonString != null) {
+                        Map<String ,List<Object>> map = (Map<String ,List<Object>>) dataSnapshot.getValue();
+                        Log.d("TAG", "Value is: " + map);
+                        Log.d("tag",String.valueOf(dataSnapshot.getValue().getClass() ));
+                        if (map != null) {
                             try {
                                 //1.
-                                JSONObject jsonObj = new JSONObject(jsonString);
-
-                                JSONArray cinema = jsonObj.getJSONArray("CINEMA");
+                                JSONObject jsonObj = new JSONObject(map);
+                                JSONArray js = jsonObj.names();
+                            for(int j=0;j<js.length();j++)    {
+                                JSONArray cinema = jsonObj.getJSONArray(String.valueOf(js.get(j)));
                                 for (int i = 0; i < cinema.length(); i++) {
                                     JSONObject e = cinema.getJSONObject(i);
 
@@ -142,7 +144,7 @@ public class CinemaFragment extends Fragment {
 
                                     cinemas.add(newCinema);
 
-                                }
+                                }}
                                 for (int i = 0; i < cinemas.size(); i++) {
                                     Log.d("tag" + String.valueOf(i), cinemas.get(i).toString());
 

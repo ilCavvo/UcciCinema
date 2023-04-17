@@ -31,7 +31,7 @@ public class HttpHandler {
             //1.
             URL url = new URL(reqUrl);
 
-            conn = dataSnapshot.getValue();
+            conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             //conn.connect();
 
