@@ -4,16 +4,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.provabottomnav.Classibase.Cinema;
 
 import java.util.ArrayList;
 
 public class CinemaInfo extends AppCompatActivity {
 
     Button back;
+    TextView indirizzo;
+    TextView nome;
+    TextView telefono;
     private ArrayList<String> titoliFilm;
     private ArrayList<String> locandineTrendFilm = new ArrayList<>();
 
@@ -21,16 +28,21 @@ public class CinemaInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cinema_info);
+        Intent intent=getIntent();
+        int listPositon=intent.getIntExtra("LIST_POSITION", 0);
+        Cinema cinema = intent.getParcelableExtra("cinema");
+        nome=findViewById(R.id.nomeCinema);
+        indirizzo=findViewById(R.id.indirizzo);
+        telefono=findViewById(R.id.telefono);
+        titoliFilm =new ArrayList<>();
+        nome.setText(cinema.getName());
+        telefono.setText(cinema.getTelefono());
+        indirizzo.setText(cinema.getIndirizzo());
+
         titoliFilm =new ArrayList<>();
         getFilm();
         initLayoutOrizzonatale();
 
-
-        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        //
-        // vedi questo video per inserire bottone back in alto a sinistra
-        // https://www.youtube.com/watch?v=FcPUFp8Qrps
-        //https://www.youtube.com/watch?v=OpK1F3Kf1uU
     }
 
     private void initLayoutOrizzonatale(){

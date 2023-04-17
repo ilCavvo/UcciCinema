@@ -22,7 +22,8 @@ public enum Region {
     TRENTINO_ALTO_ADIGE("Trentino Adige"),
     UMBRIA("Umbria"),
     VAL_D_AOSTA("Val d'Aosta"),
-    VENETO("Veneto");
+    VENETO("Veneto"),
+    NULLREGION(null);
     private String regionName;
 
     private Region(String regionName) {
@@ -38,13 +39,26 @@ public enum Region {
     public String toString() {
         return regionName;
     }
-    public static String[] getRegionStringArray(){
+
+    public static String[] getRegionStringArray() {
         String[] regionString = new String[20];
-        int i=0;
-        for (Region region: Region.values()) {
+        int i = 0;
+        for (Region region : Region.values()) {
             regionString[i] = region.getRegionName();
             i++;
+            if (i == 20) {
+                return regionString;
+            }
         }
         return regionString;
+    }
+
+    public static Region convertToRegion(String regionToConvert) {
+        for (Region region : Region.values()) {
+            if (region.getRegionName() == regionToConvert) {
+                return region;
+            }
+        }
+        return NULLREGION;
     }
 }

@@ -1,6 +1,10 @@
 package com.example.provabottomnav.Classibase;
 
-public class Cinema {
+import android.os.Parcel;
+import android.os.Parcelable;
+import androidx.annotation.NonNull;
+
+public class Cinema implements Parcelable{
 
     private String name;
     private int cinemaRoomsNumber;
@@ -8,12 +12,19 @@ public class Cinema {
     private Region region;
     private String indirizzo;
 
-    public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo) {
+    public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo, Region region) {
         this.name = name;
         this.cinemaRoomsNumber = cinemaRoomsNumber;
         this.telefono = telefono;
-        this.region = region;
         this.indirizzo = indirizzo;
+        this.region = region;
+    }
+
+    public Cinema(Parcel in) {
+        name = in.readString();
+        cinemaRoomsNumber = in.readInt();
+        indirizzo=in.readString();
+        telefono=in.readString();
     }
 
     public Cinema(String name, int cinemaRoomsNumber) {
@@ -29,6 +40,10 @@ public class Cinema {
         return name;
     }
 
+    public String getTelefono() {
+        return telefono;
+    }
+
     public int getCinemaRoomsNumber() {
         return cinemaRoomsNumber;
     }
@@ -40,4 +55,28 @@ public class Cinema {
     public String getIndirizzo() {
         return indirizzo;
     }
+    public static final Parcelable.Creator<Cinema> CREATOR=new Parcelable.Creator<Cinema>()
+    {
+        public Cinema createFromParcel(Parcel in)
+        {
+            return new Cinema(in);
+        }
+
+        public Cinema[] newArray(int size)
+        {
+            return new Cinema[size];
+        }
+    };
+    @Override
+    public void writeToParcel(@NonNull Parcel out, int flags) {
+        out.writeString(name);
+        out.writeInt(cinemaRoomsNumber);
+        out.writeString(telefono);
+        out.writeString(indirizzo);
+    }
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
 }

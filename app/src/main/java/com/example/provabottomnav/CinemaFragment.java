@@ -1,5 +1,6 @@
 package com.example.provabottomnav;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.ListView;
 
 import com.example.provabottomnav.Classibase.Cinema;
+import com.example.provabottomnav.Classibase.CinemaAdapter;
+import com.example.provabottomnav.Classibase.HttpHandler;
 import com.example.provabottomnav.Classibase.Region;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -64,8 +68,7 @@ public class CinemaFragment extends Fragment {
         // Recuperiamo un references a un widget attraverso il suo id
         cinemaListView = view.findViewById(R.id.cinemaListView);
 
-        configureListView();
-
+        createNewThread();
         return view;
     }
 
@@ -74,8 +77,8 @@ public class CinemaFragment extends Fragment {
         Log.i("ciao", "ciao");
 
         // Adattatore
-        ArrayAdapter<Region> cinemaAdapter = new ArrayAdapter<>(this.getContext(),
-                android.R.layout.simple_list_item_1, Region.values());
+        CinemaAdapter cinemaAdapter = new CinemaAdapter (this.getContext(),
+                R.layout.listacinema, cinemas);
 
         cinemaListView.setAdapter(cinemaAdapter);
 
@@ -85,7 +88,10 @@ public class CinemaFragment extends Fragment {
                                     View view,
                                     int position, long id) {
                 Log.d("OnItemClick", "ID: " + id);
-
+                Intent intent=new Intent(getContext(), CinemaInfo.class);
+                intent.putExtra("LIST_POSITION", position);
+                intent.putExtra("cinema", cinemas.get(position));
+                startActivity(intent);
             }
         };
         cinemaListView.setOnItemClickListener(clickListener);
@@ -100,23 +106,26 @@ public class CinemaFragment extends Fragment {
     }
 
     private Runnable setRunnable() {
+
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("CINEMA");
+                DatabaseReference myRef = database.getReference();
                 Log.d("TAG", "Value is: " + myRef);
+                HttpHandler httpHandler = new HttpHandler();
+                String jsonString = httpHandler.makeServiceCall(String.valueOf(myRef));
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
-                        Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
-                        Log.d("TAG", "Value is: " + map);
-                        if (map != null) {
+                        //Map<Object> map = (Map<Object>) dataSnapshot.getValue();
+                        //Log.d("TAG", "Value is: " + map);
+                        if (jsonString != null) {
                             try {
                                 //1.
-                                JSONObject jsonObj = new JSONObject(map);
+                                JSONObject jsonObj = new JSONObject(jsonString);
 
                                 JSONArray cinema = jsonObj.getJSONArray("CINEMA");
                                 for (int i = 0; i < cinema.length(); i++) {
@@ -126,11 +135,10 @@ public class CinemaFragment extends Fragment {
                                     int numSale = e.getInt("numSale");
                                     String telefono = e.getString("telefono");
                                     String indirizzo = e.getString("indirizzo");
+                                    Region regione = Region.convertToRegion(e.getString("regione"));
 
 
-                                    //Persona persona=new Persona(e.getString("nome"), e.getString("telefono"), e.getString("anni"));
-
-                                    Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo);
+                                    Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo, regione);
 
                                     cinemas.add(newCinema);
 
@@ -140,13 +148,6 @@ public class CinemaFragment extends Fragment {
 
                                 }
 
-
-                                //2.
-                                //JSONObject jsonObj=new JSONObject(jsonStr);
-
-                                //JSONArray persone=jsonObj.getJSONArray("persone");
-
-                                //personeArrayList = Persona.fromJson(persone);
                             } catch (final JSONException e) {
                                 Log.e("JASON_TEST", "Json parsing error 1: " + e.getMessage());
 
@@ -157,24 +158,8 @@ public class CinemaFragment extends Fragment {
 
 
                         }
-
-                    /* runOnUiThread(new Runnable() {
-                         @Override
-                         public void run() {
-
-                             //Log.e(JASON_TEST, "onPostExecute.");
-                             //Log.e(JASON_TEST, String.valueOf(personeArrayList));
-
-                             configureListView();
-                         }
-                     });*/
                         configureListView();
-                        //  }/*
-                        //};
 
-                        //     return runnable;
-                        //String value = dataSnapshot.getValue(String.class);
-                        //Log.d("TAG", "Value is: " + value);
                         Log.e("JASON_TEST", String.valueOf(cinemas.size()));
                     }
 
