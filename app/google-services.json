@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "368316092782",
+    "firebase_url": "https://ucci-cinema-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "ucci-cinema",
+    "storage_bucket": "ucci-cinema.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368316092782:android:d6a8ed3af29d871d7c717f",
+        "android_client_info": {
+          "package_name": "com.example.provabottomnav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368316092782-9mb34d6mhana58vmq7hdsomaictbl0rh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpEX3Ja41yyTKaD9HxCplz9NDdCz3-mF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368316092782-9mb34d6mhana58vmq7hdsomaictbl0rh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
