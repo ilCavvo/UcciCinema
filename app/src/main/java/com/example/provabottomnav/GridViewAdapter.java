@@ -10,15 +10,18 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.provabottomnav.Classibase.Film;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class GridViewAdapter extends BaseAdapter {
-    private ArrayList<String> mNames=new ArrayList<>();
+    private ArrayList<Film> mNames=new ArrayList<Film>();
     // private ArrayList<String> mImageUrls= new ArrayList<>();
     private Context mContext;
 
 
-    public GridViewAdapter(ArrayList<String> mNames, Context mContext) {
+    public GridViewAdapter(ArrayList<Film> mNames, Context mContext) {
         this.mNames = mNames;
         this.mContext=mContext;
     }
@@ -49,9 +52,10 @@ public class GridViewAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.filmview, null);
         }
-
+        ImageView image=view.findViewById(R.id.TrendFilmImage);
+        Picasso.get().load(mNames.get(i).getImmagine()).into(image);
         TextView titolo=view.findViewById(R.id.TrendFilmTitle);
-        titolo.setText(mNames.get(i));
+        titolo.setText(mNames.get(i).getTitolo());
 
         ImageView locandina = view.findViewById(R.id.TrendFilmImage);
 
