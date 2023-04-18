@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 
+import com.example.provabottomnav.Classibase.Film;
+
 import java.util.ArrayList;
 
 public class FilmInfo extends AppCompatActivity {
 
     Button back;
-    private ArrayList<String> titoliFilm;
+    private ArrayList<Film> titoliFilm;
     private ArrayList<String> locandineTrendFilm = new ArrayList<>();
 
     @Override
@@ -44,28 +46,6 @@ public class FilmInfo extends AppCompatActivity {
     }
 
     private void getFilm() {
-        titoliFilm.add("doc strange 2");
 
-        titoliFilm.add("super mario");
-
-        titoliFilm.add("me contro te");
-
-        titoliFilm.add("doc strange 2");
-
-        titoliFilm.add("doc strange 2");
-
-        titoliFilm.add("doc strange 2");
-
-        titoliFilm.add("doc strange 2");
-
-        titoliFilm.add("super mario");
-
-        titoliFilm.add("me contro te");
-
-        titoliFilm.add("doc strange 2");
-
-        titoliFilm.add("doc strange 2");
-
-        titoliFilm.add("doc strange 2");
     }
 }

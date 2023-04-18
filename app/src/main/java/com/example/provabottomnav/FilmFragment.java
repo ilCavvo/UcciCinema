@@ -40,6 +40,7 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
     private ArrayList<String> titoliTrendFilm;
     private ArrayList<String> locandineTrendFilm = new ArrayList<>();
     private ArrayList<Film> films=new ArrayList<Film>();
+    private ArrayList<Film> filmtrend=new ArrayList<Film>();
     private ArrayList<String> titoliFilm;
 
     @Override
@@ -55,8 +56,8 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
         // INIZIALIZZO LISTE FILM
         titoliTrendFilm =new ArrayList<>();
         titoliFilm =new ArrayList<>();
-        getTrendFilms();
-        initLayoutOrizzonatale(view);
+
+
         getFilmAdd(view);
         //initGridLayout(view);
 
@@ -109,8 +110,11 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
 
                                         Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama);
-
-                                       films.add(newFilm);
+                                        if(i<=9)
+                                        {
+                                            filmtrend.add(newFilm);
+                                        }else{
+                                       films.add(newFilm);}
 
                                     }}
                                 for (int i = 0; i < films.size(); i++) {
@@ -128,9 +132,11 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
 
                         }
+                        initLayoutOrizzonatale(view);
                        initGridLayout(view);
 
                         Log.e("JASON_TEST", String.valueOf(films.size()));
+                        Log.e("JASON_TEST", String.valueOf(filmtrend.size()));
                     }
 
                     @Override
@@ -144,33 +150,14 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
         };
         return runnable;
     }
-    private void getTrendFilms(){
-        //POPOLO LE LISTE PER I TITOLI DEI FILM IN IN TREND
-        locandineTrendFilm.add(String.valueOf(R.drawable.img_switcher));
-        titoliTrendFilm.add("doc strange 2");
-        locandineTrendFilm.add(String.valueOf(R.drawable.immaginemoschettieri));
-        titoliTrendFilm.add("me contro te");
-        locandineTrendFilm.add(String.valueOf(R.drawable.locandina));
-        titoliTrendFilm.add("doc strange 2");
 
-        locandineTrendFilm.add(String.valueOf(R.drawable.img_switcher__1_));
-        titoliTrendFilm.add("doc strange 2");
-        locandineTrendFilm.add(String.valueOf(R.drawable.super_mario_bros_il_film_zlqbhbt));
-        titoliTrendFilm.add("doc strange 2");
-
-
-
-        Log.i("mess","sei dentro");
-
-
-    }
 
     private void initLayoutOrizzonatale(View view){
         Log.i("mess","sei dentro2");
         LinearLayoutManager layoutManager=new LinearLayoutManager(this.getContext(),LinearLayoutManager.HORIZONTAL,false);
         RecyclerView recyclerView=view.findViewById(R.id.TrendFilmLayoutO);
         recyclerView.setLayoutManager(layoutManager);
-        RecycleViewAdapterTrendFilms adapter=new RecycleViewAdapterTrendFilms(titoliTrendFilm,locandineTrendFilm,this.getContext());
+        RecycleViewAdapterTrendFilms adapter=new RecycleViewAdapterTrendFilms(filmtrend, this.getContext());
         recyclerView.setAdapter(adapter);
 
     }

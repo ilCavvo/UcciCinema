@@ -41,7 +41,7 @@ public class CinemaInfo extends AppCompatActivity {
 
         titoliFilm =new ArrayList<>();
         getFilm();
-        initLayoutOrizzonatale();
+       // initLayoutOrizzonatale();
 
     }
 
@@ -50,8 +50,8 @@ public class CinemaInfo extends AppCompatActivity {
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         RecyclerView recyclerView=findViewById(R.id.idRecycle);
         recyclerView.setLayoutManager(layoutManager);
-        RecycleViewAdapterTrendFilms adapter=new RecycleViewAdapterTrendFilms(titoliFilm,this);
-        recyclerView.setAdapter(adapter);
+     //   RecycleViewAdapterTrendFilms adapter=new RecycleViewAdapterTrendFilms(titoliFilm,this);
+     //   recyclerView.setAdapter(adapter);
 
     }
 

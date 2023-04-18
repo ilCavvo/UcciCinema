@@ -13,25 +13,23 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.provabottomnav.Classibase.Film;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleViewAdapterTrendFilms.ViewHolder>{
-    private ArrayList<String> titoli =new ArrayList<>();
-    private ArrayList<String> locandine = new ArrayList<>();
+    private ArrayList<Film> titoli =new ArrayList<Film>();
+
     private Context mContext;
 
 
-    public RecycleViewAdapterTrendFilms(ArrayList<String> mNames,ArrayList<String> locandine,  Context mContext) {
+    public RecycleViewAdapterTrendFilms(ArrayList<Film> mNames, Context mContext) {
         this.titoli = mNames;
-        this.locandine=locandine;
-        this.mContext = mContext;
+        this.mContext=mContext;
     }
 
-    public RecycleViewAdapterTrendFilms(ArrayList<String> titoli, Context mContext) {
-        this.titoli = titoli;
-        this.mContext = mContext;
-    }
+
 
     ///CREO IL LAYOUT HOTIZONTALVIEW
     @NonNull
@@ -46,10 +44,8 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        holder.name.setText(titoli.get(position));
-        if(!locandine.isEmpty())
-            holder.image.setImageResource(Integer.parseInt(locandine.get(position)));
-
+        holder.name.setText(titoli.get(position).getTitolo());
+        Picasso.get().load(titoli.get(position).getImmagine()).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
