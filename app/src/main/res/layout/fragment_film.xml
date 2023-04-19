@@ -14,14 +14,14 @@
         android:id="@+id/HomeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background=" #202329"
+        android:background="#000000"
         android:orientation="vertical"
         tools:context=".MainActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutLogoeRicerca"
             android:layout_width="match_parent"
-            android:layout_height="111dp">
+            android:layout_height="121dp">
 
             <ImageView
                 android:id="@+id/Logo"
@@ -42,7 +42,7 @@
                 android:layout_width="269dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="8dp"
-                android:background="#666f6f"
+                android:background="@drawable/rounded"
                 android:clickable="false"
                 android:contextClickable="false"
                 app:layout_constraintEnd_toEndOf="parent"
