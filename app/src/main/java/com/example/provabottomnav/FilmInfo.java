@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.provabottomnav.Classibase.Cinema;
 import com.example.provabottomnav.Classibase.Film;
 import com.squareup.picasso.Picasso;
 
@@ -38,9 +37,9 @@ public class FilmInfo extends AppCompatActivity {
         Intent intent=getIntent();
         int listPositon=intent.getIntExtra("LIST_POSITION", 0);
         Film film = intent.getParcelableExtra("film");
-        titolo=findViewById(R.id.titoloFilm);
-        cast=findViewById(R.id.attori);
-        registi=findViewById(R.id.registi);
+        titolo=findViewById(R.id.indirizzo);
+        cast=findViewById(R.id.orario);
+        registi=findViewById(R.id.telefono);
         trama=findViewById(R.id.trama);
         locandina=findViewById(R.id.locandina);
         cast.setText("ATTORI: "+film.getAttori());

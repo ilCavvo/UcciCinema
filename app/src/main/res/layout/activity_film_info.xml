@@ -8,7 +8,7 @@
     tools:context=".FilmInfo">
 
     <TextView
-        android:id="@+id/attori"
+        android:id="@+id/orario"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -16,10 +16,10 @@
         android:text="attori: nome, nome , nome , nome"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/registi" />
+        app:layout_constraintTop_toBottomOf="@+id/telefono" />
 
     <TextView
-        android:id="@+id/titoloFilm"
+        android:id="@+id/indirizzo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/registi"
+        android:id="@+id/telefono"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -38,7 +38,7 @@
         android:text="diretto da: nome regista"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titoloFilm" />
+        app:layout_constraintTop_toBottomOf="@+id/indirizzo" />
 
     <ImageView
         android:id="@+id/locandina"
@@ -46,7 +46,7 @@
         android:layout_height="193dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titoloFilm"
+        app:layout_constraintTop_toBottomOf="@+id/indirizzo"
         app:srcCompat="@drawable/ic_launcher_foreground" />
 
     <TextView
@@ -60,10 +60,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/numSale" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/numSale"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"

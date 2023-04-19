@@ -46,6 +46,8 @@ public class CinemaInfo extends AppCompatActivity {
     TextView indirizzo;
     TextView nome;
     TextView telefono;
+    TextView orario;
+    TextView numSale;
     private ArrayList<Film> films=new ArrayList<Film>();
     private ArrayList<String> titoliFilm;
     private ArrayList<String> locandineTrendFilm = new ArrayList<>();
@@ -61,10 +63,19 @@ public class CinemaInfo extends AppCompatActivity {
         nome=findViewById(R.id.nomeCinema);
         indirizzo=findViewById(R.id.indirizzo);
         telefono=findViewById(R.id.telefono);
+        orario=findViewById(R.id.orario);
+        numSale=findViewById(R.id.numSale);
         titoliFilm =new ArrayList<>();
         nome.setText(cinema.getName());
-        telefono.setText("Indirizzo: " + cinema.getTelefono());
-        indirizzo.setText("Telefono: " + cinema.getIndirizzo());
+        telefono.setText("INDIRIZZO \n" + cinema.getTelefono());
+        indirizzo.setText("TELEFONO \n" + cinema.getIndirizzo());
+        orario.setText("ORARIO \n" +
+                       "- Dal lunedì al mercoledì: 20.00/21.30 \n" +
+                       "- Giovedì e venerdì: 17.00/21.30 \n" +
+                       "- Sabato: 17.00/23.00 \n" +
+                       "- Domenica: 15.30/21.30");
+        numSale.setText("NUMERO SALE: " + cinema.getCinemaRoomsNumber());
+
 
         titoliFilm =new ArrayList<>();
         getFilm();
