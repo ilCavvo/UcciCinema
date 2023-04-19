@@ -67,6 +67,7 @@
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
                 android:text="@string/current_week"
+                android:textSize="14sp"
                 android:textColor="#b4bac0" />
 
             <TextView
@@ -79,7 +80,7 @@
                 android:gravity="end"
                 android:text="@string/top_trending_film"
                 android:textColor="#069b5b "
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
         </LinearLayout>
 
@@ -138,7 +139,7 @@
             android:gravity="right"
             android:text="@string/other_film"
             android:textColor="#069b5b "
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -190,7 +191,8 @@
             android:horizontalSpacing="15dp"
             android:nestedScrollingEnabled="true"
             android:numColumns="4"
-            android:verticalSpacing="20dp">
+            android:verticalSpacing="20dp"
+            android:visibility="visible">
 
         </GridView>
     </LinearLayout>

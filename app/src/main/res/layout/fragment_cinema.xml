@@ -4,49 +4,76 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
+    android:background="#202329"
 tools:context=".MainActivity">
 
 
-<com.google.android.material.textfield.TextInputLayout
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:hint="@string/select"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutLogoeRicerca"
+        android:layout_width="match_parent"
+        android:layout_height="111dp">
 
-    tools:layout_editor_absoluteX="16dp"
-    tools:layout_editor_absoluteY="16dp">
+        <ImageView
+            android:id="@+id/Logo"
+            android:layout_width="80dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="true"
+            android:maxWidth="40dp"
+            android:maxHeight="40dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
 
-    <AutoCompleteTextView
-        android:id="@+id/auto_complete_textview"
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="none" />
+        android:layout_margin="70dp"
+        android:hint="@string/select"
+
+        app:boxStrokeColor="#069b5b"
+        app:endIconTint="#069b5b"
+        app:helperTextTextColor="#069b5b"
+        app:hintTextColor="#069b5b"
+        app:passwordToggleTint="#069b5b"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:inputType="none"
+            android:textSize="18sp" />
 
 
-</com.google.android.material.textfield.TextInputLayout>
+    </com.google.android.material.textfield.TextInputLayout>
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/constraintLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_anchor="@+id/constraintLayout"
-    app:layout_anchorGravity="center">
-
-    <ListView
-        android:id="@+id/cinemaListView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="150dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:fillViewport="true"
+        app:layout_anchor="@+id/constraintLayout"
+        app:layout_anchorGravity="center">
+
+        <ListView
+            android:id="@+id/cinemaListView"
+            android:layout_width="378dp"
+            android:layout_height="567dp"
+            android:layout_marginTop="164dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.488"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
