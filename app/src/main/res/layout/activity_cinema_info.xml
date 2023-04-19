@@ -42,7 +42,7 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/locandina" />
 
             <TextView
                 android:id="@+id/indirizzo"
@@ -56,7 +56,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/nomeCinema" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/locandina"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

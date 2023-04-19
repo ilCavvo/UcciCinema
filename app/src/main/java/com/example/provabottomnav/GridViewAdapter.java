@@ -66,7 +66,8 @@ public class GridViewAdapter extends BaseAdapter {
                 Log.i("click","hai premuto un pulsante");
 
                 Intent e = new Intent(mContext, FilmInfo.class);
-                //Intent e = new Intent(mContext, CinemaInfo.class);
+                e.putExtra("LIST_POSITION",i );
+                e.putExtra("film", mNames.get(i));
                 mContext.startActivity(e);
 
             }

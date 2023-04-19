@@ -43,7 +43,7 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
 //MODIFICO IL LAYOUT CREATO
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+    int i=position;
         holder.name.setText(titoli.get(position).getTitolo());
         Picasso.get().load(titoli.get(position).getImmagine()).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +52,9 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
                 Log.i("click","hai premuto un pulsante");
 
                 Intent e = new Intent(mContext, FilmInfo.class);
+                e.putExtra("LIST_POSITION",i );
+                e.putExtra("film", titoli.get(i));
+
                 //Intent e = new Intent(mContext, CinemaInfo.class);
                 mContext.startActivity(e);
 

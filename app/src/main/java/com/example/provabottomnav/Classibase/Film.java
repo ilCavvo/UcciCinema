@@ -19,6 +19,14 @@ public class Film implements Parcelable {
     private String attori;//List<String> attori;
     private String trama;
 
+    public String getTrama() {
+        return trama;
+    }
+
+    public void setTrama(String trama) {
+        this.trama = trama;
+    }
+
     public Film(int idfilm, String immagine, String anno, String durata, String genere, String paese, String titolo, String registi, String attori, String trama) {
         this.idfilm = idfilm;
         this.immagine = immagine;

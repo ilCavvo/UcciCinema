@@ -5,17 +5,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.provabottomnav.Classibase.Cinema;
 import com.example.provabottomnav.Classibase.Film;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class FilmInfo extends AppCompatActivity {
 
     Button back;
+    TextView titolo;
+    TextView cast;
+    TextView registi;
+    TextView trama;
+    ImageView locandina;
     private ArrayList<Film> titoliFilm;
     private ArrayList<String> locandineTrendFilm = new ArrayList<>();
 
@@ -23,6 +33,19 @@ public class FilmInfo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_film_info);
+        Intent intent=getIntent();
+        int listPositon=intent.getIntExtra("LIST_POSITION", 0);
+        Film film = intent.getParcelableExtra("film");
+        titolo=findViewById(R.id.titoloFilm);
+        cast=findViewById(R.id.attori);
+        registi=findViewById(R.id.registi);
+        trama=findViewById(R.id.trama);
+        locandina=findViewById(R.id.locandina);
+        cast.setText("ATTORI: "+film.getAttori());
+        titolo.setText(film.getTitolo());
+        registi.setText("REGISTI: "+film.getRegisti());
+        trama.setText(film.getTrama());
+        Picasso.get().load(film.getImmagine()).into(locandina);
         titoliFilm =new ArrayList<>();
         getFilm();
         initLayoutOrizzonatale();
