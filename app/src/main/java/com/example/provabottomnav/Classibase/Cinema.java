@@ -9,10 +9,21 @@ public class Cinema implements Parcelable{
     private String name;
     private int cinemaRoomsNumber;
     private String telefono;
-    private Region region;
+    public String region;
     private String indirizzo;
 
-    public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo, Region region) {
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "name='" + name + '\'' +
+                ", cinemaRoomsNumber=" + cinemaRoomsNumber +
+                ", telefono='" + telefono + '\'' +
+                ", region=" + region +
+                ", indirizzo='" + indirizzo + '\'' +
+                '}';
+    }
+
+    public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo, String region) {
         this.name = name;
         this.cinemaRoomsNumber = cinemaRoomsNumber;
         this.telefono = telefono;
@@ -48,8 +59,11 @@ public class Cinema implements Parcelable{
         return cinemaRoomsNumber;
     }
 
-    public Region getRegion() {
+    public String getRegion() {
+
+
         return region;
+
     }
 
     public String getIndirizzo() {

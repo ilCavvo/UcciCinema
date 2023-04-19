@@ -39,6 +39,7 @@ import java.util.concurrent.Executors;
 public class CinemaFragment extends Fragment {
 
     private ArrayList<Cinema> cinemas = new ArrayList<>();
+    private ArrayList<Cinema> cinemasForRegion = new ArrayList<>();
     public ListView cinemaListView;
     AutoCompleteTextView autoCompleteTextView;
     ArrayAdapter<String> adapterItem;
@@ -62,7 +63,21 @@ public class CinemaFragment extends Fragment {
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                cinemasForRegion.clear();
                 String item = adapterView.getItemAtPosition(position).toString();
+                Log.d("valore",item);
+                Log.d("valore",String.valueOf(cinemas.size()));
+                for(Cinema cinema:cinemas){
+                   {
+                       if(cinema.getRegion().equals(item)){
+                       Log.d("valore",cinema.toString());
+                       cinemasForRegion.add(cinema);}
+
+                    }
+                }
+                Log.d("valore",String.valueOf(cinemasForRegion.size()));
+                configureListView(cinemasForRegion);
+
             }
         });
         // Recuperiamo un references a un widget attraverso il suo id
@@ -71,7 +86,30 @@ public class CinemaFragment extends Fragment {
         createNewThread();
         return view;
     }
+    private void configureListView(ArrayList<Cinema> cinemasForRegion) {
+        Log.i("ciao", "ciao");
 
+        // Adattatore
+        CinemaAdapter cinemaAdapter = new CinemaAdapter (this.getContext(),
+                R.layout.listacinema, cinemasForRegion);
+
+        cinemaListView.setAdapter(cinemaAdapter);
+
+        AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter,
+                                    View view,
+                                    int position, long id) {
+                Log.d("OnItemClick", "ID: " + id);
+                Intent intent=new Intent(getContext(), CinemaInfo.class);
+                intent.putExtra("LIST_POSITION", position);
+                intent.putExtra("cinema", cinemas.get(position));
+                startActivity(intent);
+
+            }
+        };
+        cinemaListView.setOnItemClickListener(clickListener);
+    }
 
     private void configureListView() {
         Log.i("ciao", "ciao");
@@ -137,7 +175,7 @@ public class CinemaFragment extends Fragment {
                                     int numSale = e.getInt("numSale");
                                     String telefono = e.getString("telefono");
                                     String indirizzo = e.getString("indirizzo");
-                                    Region regione = Region.convertToRegion(e.getString("regione"));
+                                    String regione =e.getString("regione");
 
 
                                     Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo, regione);

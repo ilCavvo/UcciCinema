@@ -2,6 +2,8 @@ package com.example.provabottomnav.Classibase;
 
 import androidx.annotation.NonNull;
 
+import java.util.Locale;
+
 public enum Region {
     ABRUZZO("Abruzzo"),
     BASILICATA("Basilicata"),
@@ -55,7 +57,7 @@ public enum Region {
 
     public static Region convertToRegion(String regionToConvert) {
         for (Region region : Region.values()) {
-            if (region.getRegionName() == regionToConvert) {
+            if (region.getRegionName().toLowerCase().equals(regionToConvert.toLowerCase())) {
                 return region;
             }
         }
