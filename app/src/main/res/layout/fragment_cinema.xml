@@ -17,7 +17,7 @@ tools:context=".MainActivity">
             android:id="@+id/Logo"
             android:layout_width="80dp"
             android:layout_height="57dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:adjustViewBounds="true"
             android:maxWidth="40dp"
             android:maxHeight="40dp"
@@ -34,7 +34,7 @@ tools:context=".MainActivity">
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="70dp"
+        android:layout_margin="80dp"
         android:hint="@string/select"
 
         app:boxStrokeColor="#069b5b"
@@ -66,11 +66,12 @@ tools:context=".MainActivity">
 
         <ListView
             android:id="@+id/cinemaListView"
-            android:layout_width="378dp"
-            android:layout_height="567dp"
-            android:layout_marginTop="164dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="140dp"
+            android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.488"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
