@@ -153,12 +153,14 @@ Film film;
                                                 String telefono = e.getString("telefono");
                                                 String indirizzo = e.getString("indirizzo");
                                                 String regione =e.getString("regione");
+                                                Double latitudine = e.getDouble("latitudine");
+                                                Double longitudine = e.getDouble("longitudine");
                                                 for(int d=0;d< array.length();d++){
                                                     int dato= array.getInt(d);
                                                     Log.d("dddd",String.valueOf(dato));
                                                     listafilm.add(dato);
                                                 }
-                                                Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo, regione,listafilm);
+                                                Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo, regione,listafilm,latitudine,longitudine);
                                             cinemas.add(newCinema);
                                             break;}
                                         }

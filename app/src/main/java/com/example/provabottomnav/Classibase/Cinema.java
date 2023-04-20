@@ -16,6 +16,8 @@ public class Cinema implements Parcelable{
     private String telefono;
     public String region;
     private String indirizzo;
+    private Double latitudine;
+    private Double longitudine;
     private ArrayList<Integer> filmid=new ArrayList<>();
 
     @Override
@@ -30,13 +32,15 @@ public class Cinema implements Parcelable{
                 '}';
     }
 
-    public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo, String region,ArrayList<Integer> e) {
+    public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo, String region,ArrayList<Integer> e, Double latitudine, Double longitudine) {
         this.name = name;
         this.cinemaRoomsNumber = cinemaRoomsNumber;
         this.telefono = telefono;
         this.indirizzo = indirizzo;
         this.region = region;
         this.filmid=e;
+        this.latitudine = latitudine;
+        this.longitudine = longitudine;
     }
 
     public Cinema(Parcel in) {
@@ -46,7 +50,9 @@ public class Cinema implements Parcelable{
         telefono=in.readString();
         region=in.readString();
         filmid=in.readArrayList(Integer.class.getClassLoader());
-        Log.d("ascdas",this.toString());}
+        Log.d("ascdas",this.toString());
+        latitudine = in.readDouble();
+        longitudine = in.readDouble();}
 
     public  ArrayList<Integer> getFilmid() {
         return filmid;
@@ -99,6 +105,23 @@ public class Cinema implements Parcelable{
             return new Cinema[size];
         }
     };
+
+    public Double getLatitudine() {
+        return latitudine;
+    }
+
+    public void setLatitudine(Double latitudine) {
+        this.latitudine = latitudine;
+    }
+
+    public Double getLongitudine() {
+        return longitudine;
+    }
+
+    public void setLongitudine(Double longitudine) {
+        this.longitudine = longitudine;
+    }
+
     @Override
     public void writeToParcel(@NonNull Parcel out, int flags) {
         out.writeString(name);
@@ -107,6 +130,8 @@ public class Cinema implements Parcelable{
         out.writeString(indirizzo);
         out.writeString(region);
         out.writeList(filmid);
+        out.writeDouble(latitudine);
+        out.writeDouble(longitudine);
         Log.d("hahahhaahha",this.toString());
     }
     @Override

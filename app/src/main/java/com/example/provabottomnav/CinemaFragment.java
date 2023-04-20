@@ -183,6 +183,8 @@ public class CinemaFragment extends Fragment {
                                         String telefono = e.getString("telefono");
                                         String indirizzo = e.getString("indirizzo");
                                         String regione =e.getString("regione");
+                                        Double latitudine = e.getDouble("latitudine");
+                                        Double longitudine = e.getDouble("longitudine");
                                         int integer=0;
                                         listafilm=new ArrayList<>();
                                         array=e.getJSONArray("proiezione");
@@ -193,7 +195,7 @@ public class CinemaFragment extends Fragment {
                                             listafilm.add(id);
                                         }
                                         Log.d("componenti lista",String.valueOf(listafilm.size()));
-                                        Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo, regione,listafilm);
+                                        Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo, regione,listafilm,latitudine,longitudine);
 
                                         cinemas.add(newCinema);
 

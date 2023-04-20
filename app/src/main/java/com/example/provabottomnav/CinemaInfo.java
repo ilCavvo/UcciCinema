@@ -5,11 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.provabottomnav.Classibase.Cinema;
@@ -39,6 +43,7 @@ public class CinemaInfo extends AppCompatActivity {
     TextView orario;
     TextView numSale;
     Cinema cinema;
+    ImageView logoMaps;
     private ArrayList<Film> films=new ArrayList<Film>();
     private ArrayList<String> titoliFilm;
     private ArrayList<String> locandineTrendFilm = new ArrayList<>();
@@ -56,6 +61,7 @@ public class CinemaInfo extends AppCompatActivity {
         telefono=findViewById(R.id.telefono);
         orario=findViewById(R.id.orario);
         numSale=findViewById(R.id.numSale);
+        logoMaps=findViewById(R.id.logoMaps);
         titoliFilm =new ArrayList<>();
         nome.setText(cinema.getName());
         telefono.setText("INDIRIZZO \n" + cinema.getTelefono());
@@ -66,6 +72,15 @@ public class CinemaInfo extends AppCompatActivity {
                        "- Sabato: 17.00/23.00 \n" +
                        "- Domenica: 15.30/21.30");
         numSale.setText("NUMERO SALE: " + cinema.getCinemaRoomsNumber());
+
+        logoMaps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String uri = "http://maps.google.com/maps?saddr=" + 44.71400756615368 + "," + 10.622492806291696 + "&daddr=" + cinema.getLatitudine() + "," + cinema.getLongitudine();
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
+            }
+        });
 
 
         titoliFilm =new ArrayList<>();

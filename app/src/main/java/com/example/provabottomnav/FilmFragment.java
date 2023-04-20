@@ -111,7 +111,7 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
 
                                         Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
-                                        if(i<=9)
+                                        if(i<=5)
                                         {
                                             filmtrend.add(newFilm);
                                         }else{
