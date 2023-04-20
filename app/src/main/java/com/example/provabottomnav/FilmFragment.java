@@ -107,9 +107,10 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
                                         String regista = e.getString("regista");
                                         String titolo = e.getString("titolo");
                                         String trama = e.getString("trama");
+                                        String trailer = e.getString("trailer");
 
 
-                                        Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama);
+                                        Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
                                         if(i<=9)
                                         {
                                             filmtrend.add(newFilm);

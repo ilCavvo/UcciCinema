@@ -2,28 +2,18 @@ package com.example.provabottomnav;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.provabottomnav.Classibase.Cinema;
-import com.example.provabottomnav.Classibase.CinemaAdapter;
 import com.example.provabottomnav.Classibase.Film;
-import com.example.provabottomnav.Classibase.Region;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +27,6 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -62,7 +51,7 @@ public class CinemaInfo extends AppCompatActivity {
         Intent intent=getIntent();
         int listPositon=intent.getIntExtra("LIST_POSITION", 0);
         cinema = intent.getParcelableExtra("cinema");
-        nome=findViewById(R.id.nomeCinema);
+        nome=findViewById(R.id.nomeFilm);
         indirizzo=findViewById(R.id.indirizzo);
         telefono=findViewById(R.id.telefono);
         orario=findViewById(R.id.orario);
@@ -140,7 +129,8 @@ public class CinemaInfo extends AppCompatActivity {
                                               String regista = e.getString("regista");
                                               String titolo = e.getString("titolo");
                                               String trama = e.getString("trama");
-                                              Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama);
+                                              String trailer = e.getString("trailer");
+                                              Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
                                               films.add(newFilm);
                                                   Log.e("JASON_TEST", String.valueOf(films.size()));}
 

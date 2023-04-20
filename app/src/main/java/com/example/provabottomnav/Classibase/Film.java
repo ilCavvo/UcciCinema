@@ -18,6 +18,7 @@ public class Film implements Parcelable {
     private String registi;//List<String> registi;
     private String attori;//List<String> attori;
     private String trama;
+    private String trailer;
 
     public String getTrama() {
         return trama;
@@ -27,7 +28,7 @@ public class Film implements Parcelable {
         this.trama = trama;
     }
 
-    public Film(int idfilm, String immagine, String anno, String durata, String genere, String paese, String titolo, String registi, String attori, String trama) {
+    public Film(int idfilm, String immagine, String anno, String durata, String genere, String paese, String titolo, String registi, String attori, String trama, String trailer) {
         this.idfilm = idfilm;
         this.immagine = immagine;
         this.anno = anno;
@@ -38,6 +39,7 @@ public class Film implements Parcelable {
         this.registi = registi;
         this.attori = attori;
         this.trama = trama;
+        this.trailer = trailer;
     }
     public Film(Parcel in) {
         anno = in.readString();
@@ -50,6 +52,7 @@ public class Film implements Parcelable {
         registi=in.readString();
         titolo = in.readString();
         trama = in.readString();
+        trailer=in.readString();
 
     }
     public static final Parcelable.Creator<Film> CREATOR=new Parcelable.Creator<Film>()
@@ -76,8 +79,18 @@ public class Film implements Parcelable {
         out.writeString(registi);
         out.writeString(titolo);
         out.writeString(trama);
+        out.writeString(trailer);
 
     }
+
+    public String getTrailer() {
+        return trailer;
+    }
+
+    public void setTrailer(String trailer) {
+        this.trailer = trailer;
+    }
+
     @Override
     public int describeContents() {
         return 0;

@@ -12,187 +12,215 @@
     tools:context=".CinemaInfo">
 
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="80dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="15dp"
-        android:adjustViewBounds="true"
-        android:maxWidth="40dp"
-        android:maxHeight="40dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo" />
-
-    <TextView
-        android:id="@+id/nomeCinema"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="nomecinema"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo" />
-
-    <LinearLayout
-        style="@style/Linea"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteY="132dp">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            android:background="#b4bac0" />
-
-    </LinearLayout>
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/descrizione"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="105dp"
-        app:layout_constraintBottom_toTopOf="@+id/top_trending_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/nomeCinema"
-        tools:context=".FilmInfo">
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="80dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="15dp"
+            android:adjustViewBounds="true"
+            android:maxWidth="40dp"
+            android:maxHeight="40dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo" />
 
         <TextView
-            android:id="@+id/orario"
+            android:id="@+id/nomeFilm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
             android:layout_marginTop="30dp"
-            android:text="orario"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/telefono" />
-
-        <TextView
-            android:id="@+id/indirizzo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="indirizzo"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/telefono"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="30dp"
-            android:text="telefono"
-            android:textSize="18sp"
+            android:text="nomecinema"
+            android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/indirizzo" />
+            app:layout_constraintTop_toBottomOf="@+id/logo" />
 
-        <TextView
-            android:id="@+id/numSale"
+        <LinearLayout
+            style="@style/Linea"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="175dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="175dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomeFilm">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="3dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="1"
+                android:background="#b4bac0" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/descrizione"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="125dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/nomeFilm"
+            tools:context=".FilmInfo">
+
+            <TextView
+                android:id="@+id/telefono"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="telefono"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/indirizzo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="indirizzo"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/telefono" />
+
+            <TextView
+                android:id="@+id/orario"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="orario"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/indirizzo" />
+
+            <TextView
+                android:id="@+id/numSale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="30dp"
+                android:text="numSale"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orario" />
+
+            <TextView
+                android:id="@+id/posizione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:text="@string/mappa_cinema"
+                android:textAlignment="viewStart"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/numSale" />
+
+            <ImageView
+                android:id="@+id/maps"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/posizione"
+                app:srcCompat="@drawable/marker"
+                app:tint="#069B5B" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/top_trending_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@id/LineeColorate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descrizione">
+
+            <TextView
+                android:id="@+id/FilmProiezione"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:gravity="end"
+                android:text="@string/film_in_proiezione"
+                android:textColor="#069b5b "
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/LineeColorate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="350dp"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/idRecycle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/descrizione"
+            app:layout_constraintVertical_bias="1.0">
+
+            <View
+                android:id="@+id/Grigio"
+                android:layout_width="172dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="1"
+                android:background="#b4bac0" />
+
+
+            <View
+                android:id="@+id/Verde"
+                android:layout_width="172dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="1dp"
+                android:layout_weight="1"
+                android:background=" #069b5b"
+                tools:layout_editor_absoluteX="279dp" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/idRecycle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
-            android:layout_marginTop="30dp"
-            android:text="numSale"
-            android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/orario" />
-
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/top_trending_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/LineeColorate"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/FilmProiezione"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif"
-            android:gravity="end"
-            android:text="@string/film_in_proiezione"
-            android:textColor="#069b5b "
-            android:textSize="18sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/LineeColorate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="350dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/idRecycle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/descrizione"
-        app:layout_constraintVertical_bias="1.0">
-
-        <View
-            android:id="@+id/Grigio"
-            android:layout_width="172dp"
-            android:layout_height="3dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            android:background="#b4bac0" />
-
-
-        <View
-            android:id="@+id/Verde"
-            android:layout_width="172dp"
-            android:layout_height="3dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="1dp"
-            android:layout_weight="1"
-            android:background=" #069b5b"
-
-            tools:layout_editor_absoluteX="279dp" />
-    </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idRecycle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </ScrollView>

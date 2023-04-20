@@ -8,4 +8,7 @@
     <string name="lorem">Lorem</string>
     <string name="select">Scegli la tua regione</string>
     <string name="film_in_proiezione">Film in proiezione</string>
+    <string name="cinema_correlati">Cinema correlati</string>
+    <string name="mappa_cinema">Guarda sulla mappa</string>
+    <string name="linkTrailer">Clicca qui per vedere il trailer!</string>
 </resources>
