@@ -54,6 +54,7 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
                 Intent e = new Intent(mContext, FilmInfo.class);
                 e.putExtra("LIST_POSITION",i );
                 e.putExtra("film", titoli.get(i));
+                e.putExtra("listafilm",titoli);
 
                 //Intent e = new Intent(mContext, CinemaInfo.class);
                 mContext.startActivity(e);

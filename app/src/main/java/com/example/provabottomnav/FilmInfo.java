@@ -37,6 +37,7 @@ public class FilmInfo extends AppCompatActivity {
         Intent intent=getIntent();
         int listPositon=intent.getIntExtra("LIST_POSITION", 0);
         Film film = intent.getParcelableExtra("film");
+        titoliFilm=intent.getParcelableArrayListExtra("listafilm");
         titolo=findViewById(R.id.indirizzo);
         cast=findViewById(R.id.orario);
         registi=findViewById(R.id.telefono);
@@ -47,16 +48,8 @@ public class FilmInfo extends AppCompatActivity {
         registi.setText("REGISTI: "+film.getRegisti());
         trama.setText(film.getTrama());
         Picasso.get().load(film.getImmagine()).into(locandina);
-        titoliFilm =new ArrayList<>();
-        getFilm();
         initLayoutOrizzonatale();
 
-
-        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
-        //
-        // vedi questo video per inserire bottone back in alto a sinistra
-        // https://www.youtube.com/watch?v=FcPUFp8Qrps
-        //https://www.youtube.com/watch?v=OpK1F3Kf1uU
     }
 
     private void initLayoutOrizzonatale(){
@@ -69,7 +62,4 @@ public class FilmInfo extends AppCompatActivity {
 
     }
 
-    private void getFilm() {
-
-    }
 }
