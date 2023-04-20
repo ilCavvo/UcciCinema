@@ -52,12 +52,12 @@ public class GridViewAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.filmview, null);
         }
-        ImageView image=view.findViewById(R.id.TrendFilmImage);
+        ImageView image=view.findViewById(R.id.ImageCinema);
         Picasso.get().load(mNames.get(i).getImmagine()).into(image);
         TextView titolo=view.findViewById(R.id.TrendFilmTitle);
         titolo.setText(mNames.get(i).getTitolo());
 
-        ImageView locandina = view.findViewById(R.id.TrendFilmImage);
+        ImageView locandina = view.findViewById(R.id.ImageCinema);
 
 
         locandina.setOnClickListener(new View.OnClickListener() {

@@ -40,10 +40,10 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
         return new ViewHolder(view);
 
     }
-//MODIFICO IL LAYOUT CREATO
+    //MODIFICO IL LAYOUT CREATO
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-    int i=position;
+        int i=position;
         holder.name.setText(titoli.get(position).getTitolo());
         Picasso.get().load(titoli.get(position).getImmagine()).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
@@ -65,7 +65,7 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
     }
 
 
-// ritorno quanti titoli ci sono
+    // ritorno quanti titoli ci sono
     @Override
     public int getItemCount() {
         return titoli.size();
@@ -78,7 +78,7 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
         TextView name;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            image = itemView.findViewById(R.id.TrendFilmImage);
+            image = itemView.findViewById(R.id.ImageCinema);
             name = itemView.findViewById(R.id.TrendFilmTitle);
 
         }
