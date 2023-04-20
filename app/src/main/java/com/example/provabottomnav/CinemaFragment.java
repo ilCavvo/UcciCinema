@@ -67,8 +67,8 @@ public class CinemaFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 cinemasForRegion.clear();
                 String item = adapterView.getItemAtPosition(position).toString();
-                Log.d("valore",item);
-                Log.d("valore",String.valueOf(cinemas.size()));
+                Log.d("valorddde",item);
+                Log.d("valoddde",String.valueOf(cinemas.size()));
                 for(Cinema cinema:cinemas){
                     {
                         if(cinema.getRegion().equals(item)){
@@ -77,6 +77,7 @@ public class CinemaFragment extends Fragment {
 
                     }
                 }
+
                 Log.d("valore",String.valueOf(cinemasForRegion.size()));
                 configureListView(cinemasForRegion);
 
@@ -88,6 +89,9 @@ public class CinemaFragment extends Fragment {
         createNewThread();
         return view;
     }
+
+
+
     private void configureListView(ArrayList<Cinema> cinemasForRegion) {
         Log.i("ciao", "ciao");
 
@@ -105,7 +109,7 @@ public class CinemaFragment extends Fragment {
                 Log.d("OnItemClick", "ID: " + id);
                 Intent intent=new Intent(getContext(), CinemaInfo.class);
                 intent.putExtra("LIST_POSITION", position);
-                intent.putExtra("cinema", cinemas.get(position));
+                intent.putExtra("cinema", cinemasForRegion.get(position));
                 startActivity(intent);
 
             }
@@ -209,7 +213,7 @@ public class CinemaFragment extends Fragment {
 
 
                         }
-                        configureListView();
+                        configureListView(cinemas);
 
                         Log.e("JASON_TEST", String.valueOf(cinemas.size()));
                     }
