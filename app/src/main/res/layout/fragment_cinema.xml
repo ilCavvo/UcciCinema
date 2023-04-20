@@ -11,13 +11,13 @@ tools:context=".MainActivity">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutLogoeRicerca"
         android:layout_width="match_parent"
-        android:layout_height="111dp">
+        android:layout_height="175dp">
 
         <ImageView
             android:id="@+id/Logo"
-            android:layout_width="80dp"
-            android:layout_height="57dp"
-            android:layout_marginTop="15dp"
+            android:layout_width="90dp"
+            android:layout_height="65dp"
+            android:layout_marginTop="30dp"
             android:adjustViewBounds="true"
             android:maxWidth="40dp"
             android:maxHeight="40dp"
@@ -27,34 +27,35 @@ tools:context=".MainActivity">
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/logo" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="80dp"
-        android:hint="@string/select"
-
-        app:boxStrokeColor="#069b5b"
-        app:endIconTint="#069b5b"
-        app:helperTextTextColor="#069b5b"
-        app:hintTextColor="#069b5b"
-        app:passwordToggleTint="#069b5b"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp">
-
-        <AutoCompleteTextView
-            android:id="@+id/auto_complete_textview"
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:inputType="none"
-            android:textSize="18sp" />
+            android:layout_margin="80dp"
+
+            android:layout_marginTop="40dp"
+            android:hint="@string/select"
+            app:boxStrokeColor="#069b5b"
+            app:endIconTint="#069b5b"
+            app:helperTextTextColor="#069b5b"
+            app:hintTextColor="#069b5b"
+            app:layout_constraintTop_toTopOf="@+id/Logo"
+            app:passwordToggleTint="#069b5b"
+            tools:layout_editor_absoluteX="50dp">
+
+            <AutoCompleteTextView
+                android:id="@+id/auto_complete_textview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:inputType="none"
+                android:textSize="18sp" />
 
 
-    </com.google.android.material.textfield.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -69,7 +70,7 @@ tools:context=".MainActivity">
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="175dp"
             android:layout_marginEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -2,9 +2,9 @@
     <string name="app_name">UcciCinema</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="current_week">Current week</string>
-    <string name="top_trending_film">Top Trending Films</string>
-    <string name="other_film">Other Films</string>
+    <string name="current_week">Questa settimana</string>
+    <string name="top_trending_film">Nuove uscite</string>
+    <string name="other_film">Altri film</string>
     <string name="lorem">Lorem</string>
     <string name="select">Scegli la tua regione</string>
     <string name="film_in_proiezione">Film in proiezione</string>

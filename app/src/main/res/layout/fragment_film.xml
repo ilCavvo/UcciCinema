@@ -21,13 +21,13 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layoutLogoeRicerca"
             android:layout_width="match_parent"
-            android:layout_height="121dp">
+            android:layout_height="107dp">
 
             <ImageView
                 android:id="@+id/Logo"
-                android:layout_width="80dp"
-                android:layout_height="57dp"
-                android:layout_marginTop="15dp"
+                android:layout_width="90dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="30dp"
                 android:adjustViewBounds="true"
                 android:maxWidth="40dp"
                 android:maxHeight="40dp"
@@ -36,20 +36,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/logo" />
-
-            <SearchView
-                android:id="@+id/BarraRicerca"
-                android:layout_width="265dp"
-                android:layout_height="32dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/rounded"
-                android:clickable="false"
-                android:contextClickable="false"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/Logo">
-
-            </SearchView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

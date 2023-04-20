@@ -7,8 +7,8 @@
     <item android:title="Cinema"
         android:icon="@drawable/film"
         android:id="@+id/cinema"/>
-    <item android:title="Posizione"
-        android:icon="@drawable/location"
+    <item android:title="Preferiti"
+        android:icon="@drawable/star"
         android:id="@+id/marker"/>
     <item android:title="Game"
         android:icon="@drawable/gamepad"
