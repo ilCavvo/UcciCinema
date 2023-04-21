@@ -9,6 +9,8 @@ import java.util.List;
 
 public class Film implements Parcelable {
     private int idfilm;
+
+    public boolean preferiti=false;
     private String immagine;
     private String anno;
     private String durata;

@@ -50,11 +50,11 @@ public class GridViewAdapter extends BaseAdapter {
 
         if(view==null) {
             LayoutInflater inflater = (LayoutInflater) viewGroup.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.filmview, null);
+            view = inflater.inflate(R.layout.preferitiview, null);
         }
         ImageView image=view.findViewById(R.id.ImageCinema);
         Picasso.get().load(mNames.get(i).getImmagine()).into(image);
-        TextView titolo=view.findViewById(R.id.TrendFilmTitle);
+        TextView titolo=view.findViewById(R.id.titoloFilm);
         titolo.setText(mNames.get(i).getTitolo());
 
         ImageView locandina = view.findViewById(R.id.ImageCinema);

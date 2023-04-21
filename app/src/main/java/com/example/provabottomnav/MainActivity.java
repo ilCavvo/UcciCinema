@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     replaceFragment(new CinemaFragment());
                     break;
                 case R.id.marker:
-                    replaceFragment(new LocationFragment());
+                    replaceFragment(new PreferitiFragment());
                     break;
             }
 

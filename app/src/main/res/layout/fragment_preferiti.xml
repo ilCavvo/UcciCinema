@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/idScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAE1E1"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/HomeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutLogoeRicerca"
+            android:layout_width="match_parent"
+            android:layout_height="107dp">
+
+            <ImageView
+                android:id="@+id/Logo"
+                android:layout_width="90dp"
+                android:layout_height="65dp"
+                android:layout_marginTop="30dp"
+                android:adjustViewBounds="true"
+                android:maxWidth="40dp"
+                android:maxHeight="40dp"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/logo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/AltriFilm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="5dp"
+            android:fontFamily="sans-serif"
+            android:gravity="right"
+            android:text="@string/film_preferiti"
+            android:textColor="#069b5b "
+            android:textSize="18sp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/LineeColorate2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <View
+
+                    android:id="@+id/Grigio2"
+                    android:layout_width="172dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_weight="1"
+                    android:background="#b4bac0" />
+
+
+                <View
+
+                    android:id="@+id/Verde2"
+                    android:layout_width="172dp"
+                    android:layout_height="3dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="1dp"
+                    android:layout_weight="1"
+
+                    android:background=" #069b5b"
+                    tools:layout_editor_absoluteX="279dp" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <GridView
+            android:id="@+id/FilmPreferiti"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="10dp"
+            android:horizontalSpacing="15dp"
+            android:nestedScrollingEnabled="true"
+            android:numColumns="4"
+            android:verticalSpacing="20dp"
+            android:visibility="visible">
+
+        </GridView>
+    </LinearLayout>
+</ScrollView>

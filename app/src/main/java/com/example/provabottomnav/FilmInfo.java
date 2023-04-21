@@ -29,6 +29,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +45,7 @@ public class FilmInfo extends AppCompatActivity {
     TextView durata;
 
     public TextView nomeFilm;
+    ImageView star;
     TextView anno;
     TextView cast;
     TextView genere;
@@ -76,6 +80,7 @@ Film film;
         trama=findViewById(R.id.trama);
         locandina=findViewById(R.id.locandina);
         logoyt=findViewById(R.id.youtube);
+        star=findViewById(R.id.star);
         logoyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +94,28 @@ Film film;
                 }
             }
         });
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!film.preferiti==true) {
+                    star.setImageResource(R.drawable.star_pieno);
+                    try {
+                        FileOutputStream fos=openFileOutput("testfile.txt",MODE_PRIVATE);
+                        fos.write(String.valueOf(film.getIdfilm()).getBytes());
+                        fos.close();
+                        film.preferiti=true;
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }catch(IOException e){
+                        e.printStackTrace();
+                    }
+                } else{
+                    star.setImageResource(R.drawable.star_vuoto);
+                    film.preferiti = false;
+                }
+            }
+        });
+
         nomeFilm.setText(film.getTitolo());
         durata.setText("DURATA: "+film.getDurata());
         genere.setText("GENERE: "+film.getGenere());
