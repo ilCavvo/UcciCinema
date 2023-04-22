@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.provabottomnav.Classibase.Cinema;
+import com.example.provabottomnav.Classibase.DBHandler;
 import com.example.provabottomnav.Classibase.Film;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -62,6 +63,7 @@ public class FilmInfo extends AppCompatActivity {
     ArrayList<Integer> listafilm;
     JSONArray array;
     Film film;
+    DBHandler db;
     private ArrayList<Film> titoliFilm;
     //private ArrayList<String> locandineTrendFilm = new ArrayList<>();
 
@@ -85,6 +87,7 @@ public class FilmInfo extends AppCompatActivity {
         locandina=findViewById(R.id.locandina);
         logoyt=findViewById(R.id.youtube);
         star=findViewById(R.id.star);
+        db = new DBHandler(this);
         Log.d("preferiti",String.valueOf(film.preferiti));
         if (!(film.preferiti ==1)) {
             star.setImageResource(R.drawable.star_vuoto);}
@@ -107,37 +110,9 @@ public class FilmInfo extends AppCompatActivity {
             public void onClick(View view) {
                 if (!(film.preferiti ==1)) {
                     star.setImageResource(R.drawable.star_pieno);
-                    try {
-                       /* String separator = System.getProperty("line.separator");
-                       FileOutputStream fos=openFileOutput("preferiti.txt",MODE_PRIVATE);
-                        OutputStreamWriter osw = new OutputStreamWriter(fos);
-                        osw.append(String.valueOf(film.getIdfilm())+"");
-                        osw.append(separator);
-                        osw.flush();
-                        osw.close();
-                        fos.flush();
-                        fos.close();*/
-                        FileOutputStream fos=null;
-                        OutputStreamWriter osw;
+                    db.addNewCourse(film);
+                    film.preferiti=1;
 
-                            fos = openFileOutput("filmpreferito.txt",MODE_PRIVATE);
-                            fos.write(String.valueOf(film.getIdfilm()).getBytes());
-                            osw = new OutputStreamWriter(fos);
-                            osw.append("\r\n");
-                            osw.flush();
-                            osw.close();
-                            fos.flush();
-                            fos.close();
-
-                        /*Log.d("valore scritto",String.valueOf(film.getIdfilm()));
-                        fos.write(String.valueOf(film.getIdfilm()).getBytes());
-                        fos.close();*/
-                        film.preferiti=1;
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }catch(IOException e){
-                        e.printStackTrace();
-                    }
                 } else{
                     star.setImageResource(R.drawable.star_vuoto);
                     film.preferiti =0;

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.example.provabottomnav.Classibase.DBHandler;
 import com.example.provabottomnav.Classibase.Film;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,12 +46,9 @@ import java.util.concurrent.Executors;
 
 public class PreferitiFragment extends Fragment {
 
-    private ArrayList<String> titoliTrendFilm;
-    private ArrayList<String> locandineTrendFilm = new ArrayList<>();
     private ArrayList<Film> films=new ArrayList<Film>();
-    private ArrayList<Film> filmtrend=new ArrayList<Film>();
-    private ArrayList<String> titoliFilm;
-
+    private ArrayList<Film> filmtrend=new ArrayList<Film>();;
+    private DBHandler dbHandler;
     private ArrayList<Integer> id;
 
     @Override
@@ -59,121 +57,23 @@ public class PreferitiFragment extends Fragment {
         super.onCreate(savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_preferiti, container, false);
         // Inflate the layout for this fragment
-        getIdPreferiti(view);
+        getFilm(view);
 
         return view;
     }
 
-    private void getIdPreferiti(View view) {
-        File currentDir=this.getContext().getFilesDir();
-        id=new ArrayList<Integer>();
-        try {
-            FileInputStream fis = this.getContext().openFileInput("filmpreferito.txt");
-            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                Log.d("hshf",line.toString());
-                id.add(Integer.valueOf(line.toString()));
-                Log.d("id",String.valueOf(id.size()));
-            }
-            getFilm(view);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     private void getFilm(View view) {
-        Executor mSingleThreadExecutor = Executors.newSingleThreadExecutor();
-        mSingleThreadExecutor = Executors.newSingleThreadExecutor();
+        dbHandler = new DBHandler(view.getContext());
 
-        mSingleThreadExecutor.execute(setRunnable( view ));
-    }
-
-    private Runnable setRunnable(View view) {
-
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run()  {
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference myRef = database.getReference("FILM");
-                Log.d("TAG", "Value is: " + myRef);
-
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        Map<String , List<Object>> map = (Map<String ,List<Object>>) dataSnapshot.getValue();
-                        Log.d("TAG", "Value is: " + map);
-                        Log.d("tag",String.valueOf(dataSnapshot.getValue().getClass() ));
-                        if (map != null) {
-                            try {
-                                //1.
-                                JSONObject jsonObj = new JSONObject(map);
-                                JSONArray js = jsonObj.names();
-                                for(int j=0;j<js.length();j++)    {
-                                    JSONArray film = jsonObj.getJSONArray(String.valueOf(js.get(j)));
-                                    for (int i = 0; i < film.length(); i++) {
-                                        JSONObject e = film.getJSONObject(i);
-                                            int idfilm = e.getInt("idFilm");
-                                            if(id.contains(idfilm)){
-                                                String anno = e.getString("anno");
-                                                String cast = e.getString("cast");
-                                                String durata = e.getString("durata");
-                                                String genere = e.getString("genere");
-                                                String immagine = e.getString("immagine");
-                                                String paese = e.getString("paese");
-                                                String regista = e.getString("regista");
-                                                String titolo = e.getString("titolo");
-                                                String trama = e.getString("trama");
-                                                String trailer = e.getString("trailer");
-                                                Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer,1);
-                                                films.add(newFilm);
-                                            }
-                                    }}
-                                for (int i = 0; i < films.size(); i++) {
-                                    Log.d("tag" + String.valueOf(i), films.get(i).toString());
-
-                                }
-
-                            } catch (final JSONException e) {
-                                Log.e("JASON_TEST", "Json parsing error 1: " + e.getMessage());
-
-
-                            }
-                        } else {
-                            Log.e("JASON_TEST", "Couldn't get json from server.");
-
-
-                        }
-                        initGridLayout(view);
-
-                        Log.e("JASON_TEST", String.valueOf(films.size()));
-                        Log.e("JASON_TEST", String.valueOf(filmtrend.size()));
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                        // Failed to read value
-                        Log.w("TAG", "Failed to read value.", error.toException());
-                    }
-                });
-
-            }
-        };
-        return runnable;
+        // getting our course array
+        // list from db handler class.
+        films = dbHandler.readCourses();
+        initGridLayout(view);
     }
 
     private void initGridLayout(View view) {
         Log.i("GETCOUNTS", String.valueOf(films.size()));
-        GridViewAdapter gridadapter= new GridViewAdapter(films, this.getContext());
+        PreferitiAdapter gridadapter= new PreferitiAdapter(films, this.getContext());
         GridView gridView=view.findViewById(R.id.FilmPreferiti);
         gridView.setAdapter(gridadapter);
         //BLOCCO LA SCROLL VIEW COSI QUANDO IO SCROLLO LA GRID VIEW NON SI MUOVE IL LAYOUT INTERO

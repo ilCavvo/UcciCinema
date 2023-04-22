@@ -171,18 +171,13 @@ public class CinemaInfo extends AppCompatActivity {
                                               String durata = e.getString("durata");
                                               String genere = e.getString("genere");
                                               int idfilm = e.getInt("idFilm");
-                                              if(id.contains(idfilm)){
-                                                  ispreferito=1;
-                                              }else{
-                                                  ispreferito=0;
-                                              }
                                               String immagine = e.getString("immagine");
                                               String paese = e.getString("paese");
                                               String regista = e.getString("regista");
                                               String titolo = e.getString("titolo");
                                               String trama = e.getString("trama");
                                               String trailer = e.getString("trailer");
-                                              Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer,ispreferito);
+                                              Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
                                               films.add(newFilm);
                                                   Log.e("JASON_TEST", String.valueOf(films.size()));}
 

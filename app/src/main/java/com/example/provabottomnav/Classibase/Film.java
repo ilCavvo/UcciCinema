@@ -10,7 +10,7 @@ import java.util.List;
 public class Film implements Parcelable {
     private int idfilm;
 
-    public int preferiti;
+    public int preferiti=0;
     private String immagine;
     private String anno;
     private String durata;
@@ -30,7 +30,7 @@ public class Film implements Parcelable {
         this.trama = trama;
     }
 
-    public Film(int idfilm, String immagine, String anno, String durata, String genere, String paese, String titolo, String registi, String attori, String trama, String trailer,int isPreferito) {
+    public Film(int idfilm, String immagine, String anno, String durata, String genere, String paese, String titolo, String registi, String attori, String trama, String trailer) {
         this.idfilm = idfilm;
         this.immagine = immagine;
         this.anno = anno;
@@ -42,7 +42,7 @@ public class Film implements Parcelable {
         this.attori = attori;
         this.trama = trama;
         this.trailer = trailer;
-        this.preferiti=isPreferito;
+
     }
     public Film(Parcel in) {
         anno = in.readString();

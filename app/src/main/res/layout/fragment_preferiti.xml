@@ -104,7 +104,7 @@
             android:layout_marginBottom="10dp"
             android:horizontalSpacing="15dp"
             android:nestedScrollingEnabled="true"
-            android:numColumns="4"
+            android:numColumns="2"
             android:verticalSpacing="20dp"
             android:visibility="visible">
 

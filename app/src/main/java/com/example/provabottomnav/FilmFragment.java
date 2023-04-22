@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.GridView;
 
 import com.example.provabottomnav.Classibase.Cinema;
+import com.example.provabottomnav.Classibase.DBHandler;
 import com.example.provabottomnav.Classibase.Film;
 import com.example.provabottomnav.Classibase.Region;
 import com.google.firebase.database.DataSnapshot;
@@ -43,12 +44,11 @@ import java.util.concurrent.Executors;
 
 public class FilmFragment extends Fragment implements View.OnClickListener{
 
+    DBHandler dbHandler;
 
-    private ArrayList<String> titoliTrendFilm;
-    private ArrayList<String> locandineTrendFilm = new ArrayList<>();
     private ArrayList<Film> films=new ArrayList<Film>();
     private ArrayList<Film> filmtrend=new ArrayList<Film>();
-    private ArrayList<String> titoliFilm;
+    private ArrayList<Film> preferiti=new ArrayList<Film>();
     private int isPreferito=0;
     private ArrayList<Integer>id=new ArrayList<Integer>();
 
@@ -63,10 +63,9 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
         ///PER IL FULLSCREEN DELL APP SENZA IL NOME DEL PROGETTO
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         // INIZIALIZZO LISTE FILM
-        titoliTrendFilm =new ArrayList<>();
-        titoliFilm =new ArrayList<>();
+
         getIdPreferiti(view);
-        getFilmAdd(view);
+      //  getFilmAdd(view);
 
         //initGridLayout(view);
 
@@ -74,27 +73,12 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
     }
 
     private void getIdPreferiti(View view) {
-        File currentDir=this.getContext().getFilesDir();
+        dbHandler = new DBHandler(view.getContext());
 
-        try {
-            FileInputStream fis = this.getContext().openFileInput("filmpreferito.txt");
-            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                Log.d("line",line.toString());
-                id.add(Integer.valueOf(line.toString()));
-            }
-
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        // getting our course array
+        // list from db handler class.
+        preferiti = dbHandler.readCourses();
+        getFilmAdd(view);
     }
 
     private void getFilmAdd(View view){
@@ -131,10 +115,12 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
                                     for (int i = 0; i < film.length(); i++) {
                                         JSONObject e = film.getJSONObject(i);
                                         int idfilm = e.getInt("idFilm");
-                                        if(!id.isEmpty()&&id.contains(idfilm))  {
-                                            Log.d("preferito","yes");
-                                            isPreferito=1;
-                                        }else{isPreferito=0;}
+                                        for(int id=0;id<preferiti.size();id++){
+                                            if(preferiti.get(id).getIdfilm()==idfilm){
+                                                isPreferito=1;
+                                            }
+                                        }
+
                                         String anno = e.getString("anno");
                                         String cast = e.getString("cast");
                                         String durata = e.getString("durata");
@@ -148,7 +134,8 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
                                         String trailer = e.getString("trailer");
 
 
-                                        Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer,isPreferito);
+                                        Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
+                                        newFilm.preferiti=isPreferito;
                                         if(i<=5)
                                         {
                                             filmtrend.add(newFilm);
@@ -204,7 +191,7 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
 
     private void initGridLayout(View view){
-        Log.i("GETCOUNTS", String.valueOf(titoliFilm.size()));
+        //Log.i("GETCOUNTS", String.valueOf(titoliFilm.size()));
         GridViewAdapter gridadapter= new GridViewAdapter(films, this.getContext());
         GridView gridView=view.findViewById(R.id.AltriFilmLayout);
         gridView.setAdapter(gridadapter);
