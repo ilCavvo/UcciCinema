@@ -47,7 +47,7 @@ import java.util.concurrent.Executors;
 public class PreferitiFragment extends Fragment {
 
     private ArrayList<Film> films=new ArrayList<Film>();
-    private ArrayList<Film> filmtrend=new ArrayList<Film>();;
+    private ArrayList<Film> filmtrend=new ArrayList<Film>();
     private DBHandler dbHandler;
     private ArrayList<Integer> id;
 
@@ -58,15 +58,11 @@ public class PreferitiFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_preferiti, container, false);
         // Inflate the layout for this fragment
         getFilm(view);
-
         return view;
     }
 
     private void getFilm(View view) {
         dbHandler = new DBHandler(view.getContext());
-
-        // getting our course array
-        // list from db handler class.
         films = dbHandler.readCourses();
         initGridLayout(view);
     }
@@ -76,14 +72,5 @@ public class PreferitiFragment extends Fragment {
         PreferitiAdapter gridadapter= new PreferitiAdapter(films, this.getContext());
         GridView gridView=view.findViewById(R.id.FilmPreferiti);
         gridView.setAdapter(gridadapter);
-        //BLOCCO LA SCROLL VIEW COSI QUANDO IO SCROLLO LA GRID VIEW NON SI MUOVE IL LAYOUT INTERO
-        gridView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                v.getParent().requestDisallowInterceptTouchEvent(true);
-                return false;
-            }
-
-        });
     }
 }

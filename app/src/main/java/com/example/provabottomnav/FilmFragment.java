@@ -78,6 +78,10 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
         // getting our course array
         // list from db handler class.
         preferiti = dbHandler.readCourses();
+        for(Film preferito:preferiti){
+            Log.d("idpreferiti", String.valueOf(preferito.getIdfilm()));
+            id.add(preferito.getIdfilm());
+        }
         getFilmAdd(view);
     }
 
@@ -115,12 +119,10 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
                                     for (int i = 0; i < film.length(); i++) {
                                         JSONObject e = film.getJSONObject(i);
                                         int idfilm = e.getInt("idFilm");
-                                        for(int id=0;id<preferiti.size();id++){
-                                            if(preferiti.get(id).getIdfilm()==idfilm){
-                                                isPreferito=1;
-                                            }
-                                        }
-
+                                        if(id.contains(idfilm)){
+                                            isPreferito=1;
+                                        }else{isPreferito=0;}
+                                        Log.d("ispreferito", String.valueOf(isPreferito));
                                         String anno = e.getString("anno");
                                         String cast = e.getString("cast");
                                         String durata = e.getString("durata");
@@ -135,6 +137,7 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
 
                                         Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
+
                                         newFilm.preferiti=isPreferito;
                                         if(i<=5)
                                         {

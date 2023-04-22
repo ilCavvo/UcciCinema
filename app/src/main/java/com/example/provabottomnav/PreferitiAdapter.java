@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.provabottomnav.Classibase.DBHandler;
 import com.example.provabottomnav.Classibase.Film;
 import com.squareup.picasso.Picasso;
 
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 
 public class PreferitiAdapter extends BaseAdapter {
     private ArrayList<Film> mNames=new ArrayList<Film>();
+    private ArrayList<Film> preferiti=new ArrayList<Film>();
     // private ArrayList<String> mImageUrls= new ArrayList<>();
     private Context mContext;
 
@@ -57,6 +59,20 @@ Log.d("sei nei preferiti","eco");
         titolo.setText(mNames.get(i).getTitolo());
 
         ImageView locandina = view.findViewById(R.id.ImageCinema);
+        ImageView star=view.findViewById(R.id.star);
+        star.setImageResource(R.drawable.star_pieno);
+        star.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                DBHandler dbHandler = new DBHandler(view.getContext());
+                preferiti = dbHandler.readCourses();
+                dbHandler.deleteElement(mNames.get(i));
+                star.setImageResource(R.drawable.star_vuoto);
+
+
+            }
+        });
 
 
         locandina.setOnClickListener(new View.OnClickListener() {

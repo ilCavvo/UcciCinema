@@ -115,6 +115,7 @@ public class FilmInfo extends AppCompatActivity {
 
                 } else{
                     star.setImageResource(R.drawable.star_vuoto);
+                    db.deleteElement(film);
                     film.preferiti =0;
                 }
             }

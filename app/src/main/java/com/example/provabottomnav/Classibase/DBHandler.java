@@ -43,6 +43,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String ATTORI = "attori";
     private static final String TRAMA = "trama";
     private static final String TRAILER = "trailer";
+    private ArrayList<Film> courseModalArrayList;
 
     // creating a constructor for our database handler.
     public DBHandler(Context context) {
@@ -138,7 +139,12 @@ public class DBHandler extends SQLiteOpenHelper {
         cursorCourses.close();
         return courseModalArrayList;
     }
+public void deleteElement(Film film){
+    SQLiteDatabase db = this.getReadableDatabase();
+    db.delete(TABLE_NAME,IDFILM+"=?",new String[]{String.valueOf(film.getIdfilm())});
 
+
+}
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // this method is called to check if the table exists already.
