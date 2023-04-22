@@ -49,8 +49,8 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
     private ArrayList<Film> films=new ArrayList<Film>();
     private ArrayList<Film> filmtrend=new ArrayList<Film>();
     private ArrayList<String> titoliFilm;
-    private boolean isPreferito=false;
-    private ArrayList<Integer>id;
+    private int isPreferito=0;
+    private ArrayList<Integer>id=new ArrayList<Integer>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,8 +65,8 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
         // INIZIALIZZO LISTE FILM
         titoliTrendFilm =new ArrayList<>();
         titoliFilm =new ArrayList<>();
-
         getIdPreferiti(view);
+        getFilmAdd(view);
 
         //initGridLayout(view);
 
@@ -75,17 +75,18 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
     private void getIdPreferiti(View view) {
         File currentDir=this.getContext().getFilesDir();
-        id=new ArrayList<Integer>();
+
         try {
-            FileInputStream fis = this.getContext().openFileInput("preferiti.txt");
+            FileInputStream fis = this.getContext().openFileInput("filmpreferito.txt");
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
+                Log.d("line",line.toString());
                 id.add(Integer.valueOf(line.toString()));
             }
-            getFilmAdd(view);
+
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -130,9 +131,10 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
                                     for (int i = 0; i < film.length(); i++) {
                                         JSONObject e = film.getJSONObject(i);
                                         int idfilm = e.getInt("idFilm");
-                                        if(id.contains(idfilm))  {
-                                            isPreferito=true;
-                                        }
+                                        if(!id.isEmpty()&&id.contains(idfilm))  {
+                                            Log.d("preferito","yes");
+                                            isPreferito=1;
+                                        }else{isPreferito=0;}
                                         String anno = e.getString("anno");
                                         String cast = e.getString("cast");
                                         String durata = e.getString("durata");
@@ -146,8 +148,7 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
                                         String trailer = e.getString("trailer");
 
 
-                                        Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
-                                        newFilm.preferiti=isPreferito;
+                                        Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer,isPreferito);
                                         if(i<=5)
                                         {
                                             filmtrend.add(newFilm);

@@ -28,6 +28,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -45,6 +52,8 @@ public class CinemaInfo extends AppCompatActivity {
     Cinema cinema;
     ImageView logoMaps;
     private ArrayList<Film> films=new ArrayList<Film>();
+    private ArrayList<Integer>id;
+    private int ispreferito;
     private ArrayList<String> titoliFilm;
     private ArrayList<String> locandineTrendFilm = new ArrayList<>();
 
@@ -84,11 +93,34 @@ public class CinemaInfo extends AppCompatActivity {
 
 
         titoliFilm =new ArrayList<>();
+        getIdPreferiti();
         getFilm();
        // initLayoutOrizzonatale();
 
     }
+    private void getIdPreferiti() {
+        File currentDir=getFilesDir();
+        id=new ArrayList<Integer>();
+        try {
+            FileInputStream fis = openFileInput("preferiti.txt");
+            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                Log.d("line",line.toString());
+                id.add(Integer.valueOf(line.toString()));
+            }
 
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void initLayoutOrizzonatale(){
         Log.i("mess","sei dentro2");
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
@@ -139,13 +171,18 @@ public class CinemaInfo extends AppCompatActivity {
                                               String durata = e.getString("durata");
                                               String genere = e.getString("genere");
                                               int idfilm = e.getInt("idFilm");
+                                              if(id.contains(idfilm)){
+                                                  ispreferito=1;
+                                              }else{
+                                                  ispreferito=0;
+                                              }
                                               String immagine = e.getString("immagine");
                                               String paese = e.getString("paese");
                                               String regista = e.getString("regista");
                                               String titolo = e.getString("titolo");
                                               String trama = e.getString("trama");
                                               String trailer = e.getString("trailer");
-                                              Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
+                                              Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer,ispreferito);
                                               films.add(newFilm);
                                                   Log.e("JASON_TEST", String.valueOf(films.size()));}
 

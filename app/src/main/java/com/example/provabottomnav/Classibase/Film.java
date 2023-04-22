@@ -10,7 +10,7 @@ import java.util.List;
 public class Film implements Parcelable {
     private int idfilm;
 
-    public boolean preferiti=false;
+    public int preferiti;
     private String immagine;
     private String anno;
     private String durata;
@@ -30,7 +30,7 @@ public class Film implements Parcelable {
         this.trama = trama;
     }
 
-    public Film(int idfilm, String immagine, String anno, String durata, String genere, String paese, String titolo, String registi, String attori, String trama, String trailer) {
+    public Film(int idfilm, String immagine, String anno, String durata, String genere, String paese, String titolo, String registi, String attori, String trama, String trailer,int isPreferito) {
         this.idfilm = idfilm;
         this.immagine = immagine;
         this.anno = anno;
@@ -42,6 +42,7 @@ public class Film implements Parcelable {
         this.attori = attori;
         this.trama = trama;
         this.trailer = trailer;
+        this.preferiti=isPreferito;
     }
     public Film(Parcel in) {
         anno = in.readString();
@@ -55,6 +56,7 @@ public class Film implements Parcelable {
         titolo = in.readString();
         trama = in.readString();
         trailer=in.readString();
+        preferiti=in.readInt();
 
     }
     public static final Parcelable.Creator<Film> CREATOR=new Parcelable.Creator<Film>()
@@ -82,7 +84,7 @@ public class Film implements Parcelable {
         out.writeString(titolo);
         out.writeString(trama);
         out.writeString(trailer);
-
+        out.writeInt(preferiti);
     }
 
     public String getTrailer() {

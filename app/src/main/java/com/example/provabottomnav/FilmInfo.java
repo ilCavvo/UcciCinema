@@ -29,9 +29,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -40,10 +45,9 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class FilmInfo extends AppCompatActivity {
-
+// VARIABILI GLOBALI
     Button back;
     TextView durata;
-
     public TextView nomeFilm;
     ImageView star;
     TextView anno;
@@ -57,9 +61,9 @@ public class FilmInfo extends AppCompatActivity {
     private ArrayList<Cinema> cinemas = new ArrayList<>();
     ArrayList<Integer> listafilm;
     JSONArray array;
-Film film;
+    Film film;
     private ArrayList<Film> titoliFilm;
-    private ArrayList<String> locandineTrendFilm = new ArrayList<>();
+    //private ArrayList<String> locandineTrendFilm = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,10 @@ Film film;
         locandina=findViewById(R.id.locandina);
         logoyt=findViewById(R.id.youtube);
         star=findViewById(R.id.star);
+        Log.d("preferiti",String.valueOf(film.preferiti));
+        if (!(film.preferiti ==1)) {
+            star.setImageResource(R.drawable.star_vuoto);}
+            else{star.setImageResource(R.drawable.star_pieno);}
         logoyt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -97,13 +105,34 @@ Film film;
         star.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (!film.preferiti==true) {
+                if (!(film.preferiti ==1)) {
                     star.setImageResource(R.drawable.star_pieno);
                     try {
-                        FileOutputStream fos=openFileOutput("testfile.txt",MODE_PRIVATE);
+                       /* String separator = System.getProperty("line.separator");
+                       FileOutputStream fos=openFileOutput("preferiti.txt",MODE_PRIVATE);
+                        OutputStreamWriter osw = new OutputStreamWriter(fos);
+                        osw.append(String.valueOf(film.getIdfilm())+"");
+                        osw.append(separator);
+                        osw.flush();
+                        osw.close();
+                        fos.flush();
+                        fos.close();*/
+                        FileOutputStream fos=null;
+                        OutputStreamWriter osw;
+
+                            fos = openFileOutput("filmpreferito.txt",MODE_PRIVATE);
+                            fos.write(String.valueOf(film.getIdfilm()).getBytes());
+                            osw = new OutputStreamWriter(fos);
+                            osw.append("\r\n");
+                            osw.flush();
+                            osw.close();
+                            fos.flush();
+                            fos.close();
+
+                        /*Log.d("valore scritto",String.valueOf(film.getIdfilm()));
                         fos.write(String.valueOf(film.getIdfilm()).getBytes());
-                        fos.close();
-                        film.preferiti=true;
+                        fos.close();*/
+                        film.preferiti=1;
                     } catch (FileNotFoundException e) {
                         e.printStackTrace();
                     }catch(IOException e){
@@ -111,7 +140,7 @@ Film film;
                     }
                 } else{
                     star.setImageResource(R.drawable.star_vuoto);
-                    film.preferiti = false;
+                    film.preferiti =0;
                 }
             }
         });

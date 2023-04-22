@@ -51,16 +51,16 @@ public class PreferitiFragment extends Fragment {
     private ArrayList<Film> filmtrend=new ArrayList<Film>();
     private ArrayList<String> titoliFilm;
 
-    private ArrayList<Integer>id;
+    private ArrayList<Integer> id;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_cinema, container, false);
+        View view = inflater.inflate(R.layout.fragment_preferiti, container, false);
         // Inflate the layout for this fragment
         getIdPreferiti(view);
-        getFilm(view);
+
         return view;
     }
 
@@ -68,13 +68,15 @@ public class PreferitiFragment extends Fragment {
         File currentDir=this.getContext().getFilesDir();
         id=new ArrayList<Integer>();
         try {
-            FileInputStream fis = this.getContext().openFileInput("preferiti.txt");
+            FileInputStream fis = this.getContext().openFileInput("filmpreferito.txt");
             InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
             BufferedReader bufferedReader = new BufferedReader(isr);
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
+                Log.d("hshf",line.toString());
                 id.add(Integer.valueOf(line.toString()));
+                Log.d("id",String.valueOf(id.size()));
             }
             getFilm(view);
 
@@ -132,7 +134,7 @@ public class PreferitiFragment extends Fragment {
                                                 String titolo = e.getString("titolo");
                                                 String trama = e.getString("trama");
                                                 String trailer = e.getString("trailer");
-                                                Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
+                                                Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer,1);
                                                 films.add(newFilm);
                                             }
                                     }}
