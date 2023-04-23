@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.provabottomnav.Classibase.DBHandler;
 import com.example.provabottomnav.Classibase.Film;
@@ -69,6 +70,7 @@ Log.d("sei nei preferiti","eco");
                 preferiti = dbHandler.readCourses();
                 dbHandler.deleteElement(mNames.get(i));
                 star.setImageResource(R.drawable.star_vuoto);
+                Toast.makeText(view.getContext(),"Film rimosso dai preferiti",Toast.LENGTH_LONG).show();
 
 
             }

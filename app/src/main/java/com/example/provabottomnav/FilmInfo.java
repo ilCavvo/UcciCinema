@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.provabottomnav.Classibase.Cinema;
 import com.example.provabottomnav.Classibase.DBHandler;
@@ -110,13 +111,15 @@ public class FilmInfo extends AppCompatActivity {
             public void onClick(View view) {
                 if (!(film.preferiti ==1)) {
                     star.setImageResource(R.drawable.star_pieno);
-                    db.addNewCourse(film);
                     film.preferiti=1;
-
+                    db.addNewCourse(film);
+                    Toast.makeText(view.getContext(),"Film aggiunto ai preferiti",Toast.LENGTH_LONG).show();
                 } else{
                     star.setImageResource(R.drawable.star_vuoto);
-                    db.deleteElement(film);
                     film.preferiti =0;
+                    db.deleteElement(film);
+                    Toast.makeText(view.getContext(),"Film rimosso dai preferiti",Toast.LENGTH_LONG).show();
+
                 }
             }
         });
