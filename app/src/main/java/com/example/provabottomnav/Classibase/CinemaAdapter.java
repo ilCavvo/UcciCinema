@@ -28,22 +28,17 @@ public class CinemaAdapter extends ArrayAdapter<Cinema> {
     public View getView(int position,
                         View convertView,
                         ViewGroup parent)
-    {Log.d("tag","sei nel adapter");
-        //LayoutInflater inflater=(LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    {
         Cinema cinema=getItem(position);
-
+        // creo il layout da aggiungere alla nostra lista controllando se esiste già
         if(convertView==null) {
             LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.listacinema, null);
         }
-
+        //setto i valori ai vari componenti del layout che mi servono
         TextView nomecinema=convertView.findViewById(R.id.NomeCinema);
-
-
-        Log.d("tag",cinema.getName());
         nomecinema.setText(cinema.getName());
-
-
+        //ritorno la view per aggiungerla alla lista
         return convertView;
     }
 

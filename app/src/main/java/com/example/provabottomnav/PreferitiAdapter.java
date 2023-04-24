@@ -71,7 +71,9 @@ Log.d("sei nei preferiti","eco");
                 preferiti = dbHandler.readCourses();
                 dbHandler.deleteElement(mNames.get(i));
                 star.setImageResource(R.drawable.star_vuoto);
+                preferiti.remove(mNames.get(i));
                 Toast.makeText(view.getContext(),"Film rimosso dai preferiti",Toast.LENGTH_LONG).show();
+                refresh(preferiti);
 
 
 
@@ -88,6 +90,7 @@ Log.d("sei nei preferiti","eco");
                 e.putExtra("LIST_POSITION",i );
                 e.putExtra("listafilm",mNames);
                 e.putExtra("film", mNames.get(i));
+
                 mContext.startActivity(e);
 
             }
@@ -97,9 +100,9 @@ Log.d("sei nei preferiti","eco");
         return view;}
     public void refresh(ArrayList<Film> preferiti)
     {
-        Log.d("sei dentrooooooo",String.valueOf(preferiti.size()));
-        this.preferiti = preferiti;
-        notifyDataSetChanged();
+        mNames.clear();
+        mNames.addAll(preferiti);
+        this.notifyDataSetChanged();
     }
 }
 

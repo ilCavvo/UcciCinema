@@ -69,10 +69,6 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
         // INIZIALIZZO LISTE FILM
 
         getIdPreferiti(view);
-      //  getFilmAdd(view);
-
-        //initGridLayout(view);
-
         return view;
     }
 

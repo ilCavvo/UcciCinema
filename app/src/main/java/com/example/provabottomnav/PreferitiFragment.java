@@ -75,13 +75,6 @@ View view;
         PreferitiAdapter gridadapter= new PreferitiAdapter(films, this.getContext());
          gridView=view.findViewById(R.id.FilmPreferiti);
         gridView.setAdapter(gridadapter);
-       gridView.setOnTouchListener(new View.OnTouchListener() {
-           @Override
-           public boolean onTouch(View v, MotionEvent event) {
-                getFilm(view);
-               return false;
-           }
-       });
     }
     @Override
     public void onConfigurationChanged(Configuration newConfig) {

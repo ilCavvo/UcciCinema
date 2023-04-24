@@ -55,35 +55,32 @@ public class CinemaFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_cinema, container, false);
         super.onCreate(savedInstanceState);
 
-
+///prendo il menu a tendina per la lista di cinema
         autoCompleteTextView = view.findViewById(R.id.auto_complete_textview);
-
+//inizializzo la lista delle regioni da mettere nel menu a tendina
         adapterItem = new ArrayAdapter<String>(this.getContext(), R.layout.list_item, Region.getRegionStringArray());
-
+//metto la lista nel menu a tendina
         autoCompleteTextView.setAdapter(adapterItem);
 
+
+        //metto un click listener per le regini che quando clicco mi resizano la lista mettendo solo
+        //i cinema della regione scelta
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 cinemasForRegion.clear();
                 String item = adapterView.getItemAtPosition(position).toString();
-                Log.d("valorddde",item);
-                Log.d("valoddde",String.valueOf(cinemas.size()));
                 for(Cinema cinema:cinemas){
                     {
                         if(cinema.getRegion().equals(item)){
-                            Log.d("valore",cinema.toString());
                             cinemasForRegion.add(cinema);}
-
                     }
                 }
-
-                Log.d("valore",String.valueOf(cinemasForRegion.size()));
                 configureListView(cinemasForRegion);
 
             }
         });
-        // Recuperiamo un references a un widget attraverso il suo id
+        // Recuperiamo un reference a un widget attraverso il suo id
         cinemaListView = view.findViewById(R.id.cinemaListView);
 
         createNewThread();
@@ -93,20 +90,18 @@ public class CinemaFragment extends Fragment {
 
 
     private void configureListView(ArrayList<Cinema> cinemasForRegion) {
-        Log.i("ciao", "ciao");
 
         // Adattatore
         CinemaAdapter cinemaAdapter = new CinemaAdapter (this.getContext(),
                 R.layout.listacinema, cinemasForRegion);
 
         cinemaListView.setAdapter(cinemaAdapter);
-
+//SETTO IL LISTENER CHE APRIRA LA ACTIVITY CINEMA INFO CON I DATI DEL CINEMA E FILM IN PROIEZIONE IN ESSO
         AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter,
                                     View view,
                                     int position, long id) {
-                Log.d("OnItemClick", "ID: " + id);
                 Intent intent=new Intent(getContext(), CinemaInfo.class);
                 intent.putExtra("LIST_POSITION", position);
                 intent.putExtra("cinema", cinemasForRegion.get(position));
@@ -117,33 +112,8 @@ public class CinemaFragment extends Fragment {
         cinemaListView.setOnItemClickListener(clickListener);
     }
 
-    private void configureListView() {
-        Log.i("ciao", "ciao");
-
-        // Adattatore
-        CinemaAdapter cinemaAdapter = new CinemaAdapter (this.getContext(),
-                R.layout.listacinema, cinemas);
-
-        cinemaListView.setAdapter(cinemaAdapter);
-
-        AdapterView.OnItemClickListener clickListener = new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter,
-                                    View view,
-                                    int position, long id) {
-                Log.d("OnItemClick", "ID: " + id);
-                Intent intent=new Intent(getContext(), CinemaInfo.class);
-                intent.putExtra("LIST_POSITION", position);
-                intent.putExtra("cinema", cinemas.get(position));
-                startActivity(intent);
-
-            }
-        };
-        cinemaListView.setOnItemClickListener(clickListener);
-    }
-
     public void createNewThread() {
-
+//inizializzo il thread di caricamento cinema
         Executor mSingleThreadExecutor = Executors.newSingleThreadExecutor();
         mSingleThreadExecutor = Executors.newSingleThreadExecutor();
 
@@ -155,10 +125,11 @@ public class CinemaFragment extends Fragment {
         Runnable runnable = new Runnable() {
             @Override
             public void run()  {
+                //ACCEDO AL FIREBASE DA CUI PRENDEREMO I NOSTRI DATI
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 DatabaseReference myRef = database.getReference("CINEMA");
                 Log.d("TAG", "Value is: " + myRef);
-
+                //CARICO I DATI CHE SONO IN FORMATO JSON
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -166,8 +137,6 @@ public class CinemaFragment extends Fragment {
                         // This method is called once with the initial value and again
                         // whenever data at this location is updated.
                         Map<String , List<Object>> map = (Map<String ,List<Object>>) dataSnapshot.getValue();
-                        Log.d("TAG", "Value is: " + map);
-                        Log.d("tag",String.valueOf(dataSnapshot.getValue().getClass() ));
                         if (map != null) {
                             try {
                                 //1.
@@ -177,7 +146,6 @@ public class CinemaFragment extends Fragment {
                                     JSONArray cinema = jsonObj.getJSONArray(String.valueOf(js.get(j)));
                                     for (int i = 0; i < cinema.length(); i++) {
                                         JSONObject e = cinema.getJSONObject(i);
-
                                         String nome = e.getString("nome");
                                         int numSale = e.getInt("numSale");
                                         String telefono = e.getString("telefono");
@@ -188,15 +156,11 @@ public class CinemaFragment extends Fragment {
                                         int integer=0;
                                         listafilm=new ArrayList<>();
                                         array=e.getJSONArray("proiezione");
-                                        Log.d("dddd",String.valueOf(array.length()));
                                         for(int var=0;var< array.length();var++){
                                             int id= array.getInt(var);
-                                            Log.d("dddd",String.valueOf(id));
                                             listafilm.add(id);
                                         }
-                                        Log.d("componenti lista",String.valueOf(listafilm.size()));
                                         Cinema newCinema = new Cinema(nome, numSale, telefono, indirizzo, regione,listafilm,latitudine,longitudine);
-
                                         cinemas.add(newCinema);
 
                                     }}
