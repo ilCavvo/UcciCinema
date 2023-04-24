@@ -1,5 +1,6 @@
 package com.example.provabottomnav;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -51,12 +52,13 @@ public class PreferitiFragment extends Fragment {
     private ArrayList<Film> filmtrend=new ArrayList<Film>();
     private DBHandler dbHandler;
     private ArrayList<Integer> id;
-
+    GridView gridView;
+View view;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_preferiti, container, false);
+         view = inflater.inflate(R.layout.fragment_preferiti, container, false);
         // Inflate the layout for this fragment
         getFilm(view);
         return view;
@@ -71,7 +73,7 @@ public class PreferitiFragment extends Fragment {
     private void initGridLayout(View view) {
         Log.i("GETCOUNTS", String.valueOf(films.size()));
         PreferitiAdapter gridadapter= new PreferitiAdapter(films, this.getContext());
-        GridView gridView=view.findViewById(R.id.FilmPreferiti);
+         gridView=view.findViewById(R.id.FilmPreferiti);
         gridView.setAdapter(gridadapter);
        gridView.setOnTouchListener(new View.OnTouchListener() {
            @Override
@@ -80,5 +82,11 @@ public class PreferitiFragment extends Fragment {
                return false;
            }
        });
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        gridView.setNumColumns(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 5 : 2);
+        initGridLayout(view);
+        super.onConfigurationChanged(newConfig);
     }
 }
