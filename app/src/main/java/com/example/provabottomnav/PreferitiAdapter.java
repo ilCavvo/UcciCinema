@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -73,6 +74,7 @@ Log.d("sei nei preferiti","eco");
                 Toast.makeText(view.getContext(),"Film rimosso dai preferiti",Toast.LENGTH_LONG).show();
 
 
+
             }
         });
 
@@ -93,6 +95,12 @@ Log.d("sei nei preferiti","eco");
 
 
         return view;}
+    public void refresh(ArrayList<Film> preferiti)
+    {
+        Log.d("sei dentrooooooo",String.valueOf(preferiti.size()));
+        this.preferiti = preferiti;
+        notifyDataSetChanged();
+    }
 }
 
 

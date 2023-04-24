@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.example.provabottomnav.Classibase.DBHandler;
@@ -72,5 +73,12 @@ public class PreferitiFragment extends Fragment {
         PreferitiAdapter gridadapter= new PreferitiAdapter(films, this.getContext());
         GridView gridView=view.findViewById(R.id.FilmPreferiti);
         gridView.setAdapter(gridadapter);
+       gridView.setOnTouchListener(new View.OnTouchListener() {
+           @Override
+           public boolean onTouch(View v, MotionEvent event) {
+                getFilm(view);
+               return false;
+           }
+       });
     }
 }
