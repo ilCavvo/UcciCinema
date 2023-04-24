@@ -85,7 +85,7 @@ public class CinemaInfo extends AppCompatActivity {
         logoMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String uri = "http://maps.google.com/maps?saddr=" + 44.71400756615368 + "," + 10.622492806291696 + "&daddr=" + cinema.getLatitudine() + "," + cinema.getLongitudine();
+                String uri = "http://maps.google.com/maps?saddr=" + 44.71386421336731 + "," + 10.622435125522967 + "&daddr=" + cinema.getLatitudine() + "," + cinema.getLongitudine();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                 startActivity(intent);
             }
