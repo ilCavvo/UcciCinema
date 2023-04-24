@@ -1,5 +1,6 @@
 package com.example.provabottomnav;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,15 +51,18 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
     private ArrayList<Film> filmtrend=new ArrayList<Film>();
     private ArrayList<Film> preferiti=new ArrayList<Film>();
     private int isPreferito=0;
+    GridView gridView;
+    View view;
     private ArrayList<Integer>id=new ArrayList<Integer>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view;
+
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.fragment_film, container, false);
         super.onCreate(savedInstanceState);
+
 
         ///PER IL FULLSCREEN DELL APP SENZA IL NOME DEL PROGETTO
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -196,7 +200,8 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
     private void initGridLayout(View view){
         //Log.i("GETCOUNTS", String.valueOf(titoliFilm.size()));
         GridViewAdapter gridadapter= new GridViewAdapter(films, this.getContext());
-        GridView gridView=view.findViewById(R.id.AltriFilmLayout);
+         gridView=view.findViewById(R.id.AltriFilmLayout);
+        Log.d("landscape:",String.valueOf(view.getResources().getConfiguration().orientation));
         gridView.setAdapter(gridadapter);
         //BLOCCO LA SCROLL VIEW COSI QUANDO IO SCROLLO LA GRID VIEW NON SI MUOVE IL LAYOUT INTERO
         gridView.setOnTouchListener(new View.OnTouchListener() {
@@ -208,7 +213,12 @@ public class FilmFragment extends Fragment implements View.OnClickListener{
 
         });
     }
-
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        gridView.setNumColumns(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE ? 7 : 4);
+        initGridLayout(view);
+        super.onConfigurationChanged(newConfig);
+    }
     @Override
     public void onClick(View view) {
 
