@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.example.provabottomnav.Classibase.Film;
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +47,9 @@ public class RecycleViewAdapterTrendFilms extends RecyclerView.Adapter<RecycleVi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         int i=position;
         holder.name.setText(titoli.get(position).getTitolo());
-        Picasso.get().load(titoli.get(position).getImmagine()).into(holder.image);
+        Glide.with(mContext).load(titoli.get(i).getImmagine()).override(Target.SIZE_ORIGINAL).into(holder.image);
+
+      //  Picasso.get().load(titoli.get(position).getImmagine()).into(holder.image);
         holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

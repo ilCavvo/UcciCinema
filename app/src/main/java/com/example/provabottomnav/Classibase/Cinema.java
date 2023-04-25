@@ -20,17 +20,6 @@ public class Cinema implements Parcelable{
     private Double longitudine;
     private ArrayList<Integer> filmid=new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Cinema{" +
-                "name='" + name + '\'' +
-                ", cinemaRoomsNumber=" + cinemaRoomsNumber +
-                ", telefono='" + telefono + '\'' +
-                ", region=" + region +
-                ", indirizzo='" + indirizzo + '\'' +
-                ", indirizzo='"+ filmid  +
-                '}';
-    }
 
     public Cinema(String name, int cinemaRoomsNumber, String telefono, String indirizzo, String region,ArrayList<Integer> e, Double latitudine, Double longitudine) {
         this.name = name;
@@ -50,7 +39,6 @@ public class Cinema implements Parcelable{
         telefono=in.readString();
         region=in.readString();
         filmid=in.readArrayList(Integer.class.getClassLoader());
-        Log.d("ascdas",this.toString());
         latitudine = in.readDouble();
         longitudine = in.readDouble();}
 
@@ -132,11 +120,21 @@ public class Cinema implements Parcelable{
         out.writeList(filmid);
         out.writeDouble(latitudine);
         out.writeDouble(longitudine);
-        Log.d("hahahhaahha",this.toString());
     }
     @Override
     public int describeContents() {
         return 0;
     }
 
+    @Override
+    public String toString() {
+        return "Cinema{" +
+                "name='" + name + '\'' +
+                ", cinemaRoomsNumber=" + cinemaRoomsNumber +
+                ", telefono='" + telefono + '\'' +
+                ", region=" + region +
+                ", indirizzo='" + indirizzo + '\'' +
+                ", indirizzo='"+ filmid  +
+                '}';
+    }
 }

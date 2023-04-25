@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.provabottomnav.Classibase.Cinema;
+import com.example.provabottomnav.Classibase.DBHandler;
 import com.example.provabottomnav.Classibase.Film;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,13 +28,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -52,10 +45,9 @@ public class CinemaInfo extends AppCompatActivity {
     Cinema cinema;
     ImageView logoMaps;
     private ArrayList<Film> films=new ArrayList<Film>();
-    private ArrayList<Integer>id;
-    private int ispreferito;
-    private ArrayList<String> titoliFilm;
-    private ArrayList<String> locandineTrendFilm = new ArrayList<>();
+    private ArrayList<Film> preferiti;
+    private int ispreferito=0;
+    private ArrayList<Integer> id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +55,8 @@ public class CinemaInfo extends AppCompatActivity {
         setContentView(R.layout.activity_cinema_info);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Intent intent=getIntent();
+        //RECUPERO I DATI MANDATI DAL ACTIVITY CHIAMANTE E INIZIALIZZO
+        // I VARI ELEMENTI DEL LAYOUT
         int listPositon=intent.getIntExtra("LIST_POSITION", 0);
         cinema = intent.getParcelableExtra("cinema");
         nome=findViewById(R.id.nomeFilm);
@@ -71,7 +65,6 @@ public class CinemaInfo extends AppCompatActivity {
         orario=findViewById(R.id.orario);
         numSale=findViewById(R.id.numSale);
         logoMaps=findViewById(R.id.logoMaps);
-        titoliFilm =new ArrayList<>();
         nome.setText(cinema.getName());
         telefono.setText("INDIRIZZO \n" + cinema.getTelefono());
         indirizzo.setText("TELEFONO \n" + cinema.getIndirizzo());
@@ -81,7 +74,8 @@ public class CinemaInfo extends AppCompatActivity {
                        "- Sabato: 17.00/23.00 \n" +
                        "- Domenica: 15.30/21.30");
         numSale.setText("NUMERO SALE: " + cinema.getCinemaRoomsNumber());
-
+        //LISTENER SUL LOGO DI MAPS DEL LAYOUT CHE APPENA PREMUTO APRE L APPLICAZIONE
+        //DI GOOGLE MAPS CON IL TRAGITTO DALLA PROPRIA POSIZIONE AL CINEMA  SCELTO
         logoMaps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,37 +86,24 @@ public class CinemaInfo extends AppCompatActivity {
         });
 
 
-        titoliFilm =new ArrayList<>();
         getIdPreferiti();
         getFilm();
-       // initLayoutOrizzonatale();
-
     }
     private void getIdPreferiti() {
-        File currentDir=getFilesDir();
+        preferiti =new ArrayList<Film>();
         id=new ArrayList<Integer>();
-        try {
-            FileInputStream fis = openFileInput("preferiti.txt");
-            InputStreamReader isr = new InputStreamReader(fis, "UTF-8");
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            StringBuilder sb = new StringBuilder();
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                Log.d("line",line.toString());
-                id.add(Integer.valueOf(line.toString()));
-            }
 
+        DBHandler dbHandler = new DBHandler(this);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // getting our course array
+        // list from db handler class.
+        preferiti = dbHandler.readCourses();
+        for(Film preferito: preferiti){
+
+            id.add(preferito.getIdfilm());
         }
     }
     private void initLayoutOrizzonatale(){
-        Log.i("mess","sei dentro2");
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false);
         RecyclerView recyclerView=findViewById(R.id.idRecycle);
         recyclerView.setLayoutManager(layoutManager);
@@ -163,14 +144,18 @@ public class CinemaInfo extends AppCompatActivity {
                                     JSONArray js = jsonObj.names();
                                     for(int j=0;j<js.length();j++)    {
                                         JSONArray film = jsonObj.getJSONArray(String.valueOf(js.get(j)));
+                                        Log.d("value is",String.valueOf(film));
                                         for (int i = 0; i < film.length(); i++) {
                                             JSONObject e = film.getJSONObject(i);
                                             if(cinema.getFilmid().contains(e.getInt("idFilm"))){
-                                              {String anno = e.getString("anno");
+                                              {int idfilm = e.getInt("idFilm");
+                                                  if(id.contains(idfilm)){
+                                                      ispreferito=1;
+                                                  }else{ispreferito=0;}
+                                                  String anno = e.getString("anno");
                                               String cast = e.getString("cast");
                                               String durata = e.getString("durata");
                                               String genere = e.getString("genere");
-                                              int idfilm = e.getInt("idFilm");
                                               String immagine = e.getString("immagine");
                                               String paese = e.getString("paese");
                                               String regista = e.getString("regista");
@@ -178,6 +163,7 @@ public class CinemaInfo extends AppCompatActivity {
                                               String trama = e.getString("trama");
                                               String trailer = e.getString("trailer");
                                               Film newFilm = new Film(idfilm,immagine,anno,durata,genere,paese,titolo,regista,cast,trama,trailer);
+                                              newFilm.preferiti=ispreferito;
                                               films.add(newFilm);
                                                   Log.e("JASON_TEST", String.valueOf(films.size()));}
 
