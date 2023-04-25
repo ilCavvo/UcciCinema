@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.example.provabottomnav.Classibase.Film;
 import com.squareup.picasso.Picasso;
 
@@ -52,7 +54,8 @@ public class GridViewAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.filmview, null);
         }
         ImageView image=view.findViewById(R.id.ImageCinema);
-        Picasso.get().load(mNames.get(i).getImmagine()).into(image);
+        Glide.with(view.getContext()).load(mNames.get(i).getImmagine()).override(Target.SIZE_ORIGINAL).into(image);
+        //Picasso.get().load(mNames.get(i).getImmagine()).into(image);
         TextView titolo=view.findViewById(R.id.TrendFilmTitle);
         titolo.setText(mNames.get(i).getTitolo());
 

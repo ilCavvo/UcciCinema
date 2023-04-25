@@ -144,6 +144,7 @@ public class CinemaInfo extends AppCompatActivity {
                                     JSONArray js = jsonObj.names();
                                     for(int j=0;j<js.length();j++)    {
                                         JSONArray film = jsonObj.getJSONArray(String.valueOf(js.get(j)));
+                                        Log.d("value is",String.valueOf(film));
                                         for (int i = 0; i < film.length(); i++) {
                                             JSONObject e = film.getJSONObject(i);
                                             if(cinema.getFilmid().contains(e.getInt("idFilm"))){
