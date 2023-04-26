@@ -60,9 +60,12 @@ public class FilmInfo extends AppCompatActivity {
     TextView trama;
     ImageView logoyt;
     ImageView locandina;
+    ImageView backimage;
     private ArrayList<Cinema> cinemas = new ArrayList<>();
     ArrayList<Integer> listafilm;
+    ArrayList<Integer> id=new ArrayList<>();;
     JSONArray array;
+    ArrayList<Film> dbfilm=new ArrayList<>();
     Film film;
     DBHandler db;
     private ArrayList<Film> titoliFilm;
@@ -88,7 +91,22 @@ public class FilmInfo extends AppCompatActivity {
         locandina=findViewById(R.id.locandina);
         logoyt=findViewById(R.id.youtube);
         star=findViewById(R.id.star);
+        backimage=findViewById(R.id.back);
+        backimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         db = new DBHandler(this);
+        dbfilm=db.readCourses();
+        for(Film preferito: dbfilm){
+            id.add(preferito.getIdfilm());
+        }
+        if(id.contains(film.getIdfilm())){
+            film.preferiti=1;
+        }else{film.preferiti=0;}
+
         Log.d("preferiti",String.valueOf(film.preferiti));
         if (!(film.preferiti ==1)) {
             star.setImageResource(R.drawable.star_vuoto);}

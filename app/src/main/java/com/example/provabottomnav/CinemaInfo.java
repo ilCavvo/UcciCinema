@@ -44,6 +44,7 @@ public class CinemaInfo extends AppCompatActivity {
     TextView numSale;
     Cinema cinema;
     ImageView logoMaps;
+    ImageView backimage;
     private ArrayList<Film> films=new ArrayList<Film>();
     private ArrayList<Film> preferiti;
     private int ispreferito=0;
@@ -74,6 +75,13 @@ public class CinemaInfo extends AppCompatActivity {
                        "- Sabato: 17.00/23.00 \n" +
                        "- Domenica: 15.30/21.30");
         numSale.setText("NUMERO SALE: " + cinema.getCinemaRoomsNumber());
+        backimage=findViewById(R.id.back);
+        backimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         //LISTENER SUL LOGO DI MAPS DEL LAYOUT CHE APPENA PREMUTO APRE L APPLICAZIONE
         //DI GOOGLE MAPS CON IL TRAGITTO DALLA PROPRIA POSIZIONE AL CINEMA  SCELTO
         logoMaps.setOnClickListener(new View.OnClickListener() {
