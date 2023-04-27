@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.marker:
                     replaceFragment(new PreferitiFragment());
                     break;
+                case R.id.game:
+                    replaceFragment(new GameFragment());
+                    break;
             }
 
 
