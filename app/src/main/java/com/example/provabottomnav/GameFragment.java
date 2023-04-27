@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 public class GameFragment extends Fragment {
@@ -29,8 +30,8 @@ public class GameFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_game, container, false);
 
-        Button gameButton = view.findViewById(R.id.buttonGame);
-        gameButton.setOnClickListener(new View.OnClickListener() {
+        ImageView buttonGame = view.findViewById(R.id.buttonGame);
+        buttonGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_MAIN);
